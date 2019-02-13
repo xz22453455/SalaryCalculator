@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sss.calculator.dao.FieldVariableRefDao">
+  <resultMap id="BaseResultMap" type="com.sss.calculator.model.FieldVariableRef">
+    <result column="ORDER_APPRAISAL_SALARY" jdbcType="VARCHAR" property="orderAppraisalSalary" />
+    <result column="PROFIT_APPRAISAL_SALARY" jdbcType="VARCHAR" property="profitAppraisalSalary" />
+    <result column="RETURN_PAY" jdbcType="VARCHAR" property="returnPay" />
+    <result column="DELIVERY_PAY" jdbcType="VARCHAR" property="deliveryPay" />
+    <result column="CURRENT_MONTH_SIZE" jdbcType="VARCHAR" property="currentMonthSize" />
+    <result column="CURRENT_MONTH_OUTPUT_SIZE" jdbcType="VARCHAR" property="currentMonthOutputSize" />
+    <result column="MONTH_TARGET_SIZE" jdbcType="VARCHAR" property="monthTargetSize" />
+    <result column="CURRENT_MONTH_MONEY" jdbcType="VARCHAR" property="currentMonthMoney" />
+    <result column="CURRENT_MONTH_OUTPUT_MONEY" jdbcType="VARCHAR" property="currentMonthOutputMoney" />
+    <result column="MONTH_TARGET_MONEY" jdbcType="VARCHAR" property="monthTargetMoney" />
+    <result column="PRICE_PER_TON" jdbcType="VARCHAR" property="pricePerTon" />
+    <result column="TOTAL_ORDER_SIZE" jdbcType="VARCHAR" property="totalOrderSize" />
+    <result column="YEAR_TARGET_SIZE" jdbcType="VARCHAR" property="yearTargetSize" />
+    <result column="TOTAL_ORDER_MONEY" jdbcType="VARCHAR" property="totalOrderMoney" />
+    <result column="YEAR_TARGET_MONEY" jdbcType="VARCHAR" property="yearTargetMoney" />
+    <result column="TOTAL_OUTPUT_SIZE" jdbcType="VARCHAR" property="totalOutputSize" />
+    <result column="TOTAL_OUTPUT_MONEY" jdbcType="VARCHAR" property="totalOutputMoney" />
+    <result column="TOTAL_RETURN_MONEY" jdbcType="VARCHAR" property="totalReturnMoney" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ORDER_APPRAISAL_SALARY, PROFIT_APPRAISAL_SALARY, RETURN_PAY, DELIVERY_PAY, CURRENT_MONTH_SIZE, 
+    CURRENT_MONTH_OUTPUT_SIZE, MONTH_TARGET_SIZE, CURRENT_MONTH_MONEY, CURRENT_MONTH_OUTPUT_MONEY, 
+    MONTH_TARGET_MONEY, PRICE_PER_TON, TOTAL_ORDER_SIZE, YEAR_TARGET_SIZE, TOTAL_ORDER_MONEY, 
+    YEAR_TARGET_MONEY, TOTAL_OUTPUT_SIZE, TOTAL_OUTPUT_MONEY, TOTAL_RETURN_MONEY
+  </sql>
+  <select id="selectByYear" parameterType="String" resultType="com.sss.calculator.model.FieldVariableRef" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from ERP_HR_DF_FIELD_VARIABLE_REF
+    <if test="year != null">
+      where year = #{year }
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.sss.calculator.model.FieldVariableRefExample">
+    delete from ERP_HR_DF_FIELD_VARIABLE_REF
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sss.calculator.model.FieldVariableRef">
+    insert into ERP_HR_DF_FIELD_VARIABLE_REF (ORDER_APPRAISAL_SALARY, PROFIT_APPRAISAL_SALARY, 
+      RETURN_PAY, DELIVERY_PAY, CURRENT_MONTH_SIZE, 
+      CURRENT_MONTH_OUTPUT_SIZE, MONTH_TARGET_SIZE, 
+      CURRENT_MONTH_MONEY, CURRENT_MONTH_OUTPUT_MONEY, 
+      MONTH_TARGET_MONEY, PRICE_PER_TON, TOTAL_ORDER_SIZE, 
+      YEAR_TARGET_SIZE, TOTAL_ORDER_MONEY, YEAR_TARGET_MONEY, 
+      TOTAL_OUTPUT_SIZE, TOTAL_OUTPUT_MONEY, TOTAL_RETURN_MONEY
+      )
+    values (#{orderAppraisalSalary,jdbcType=VARCHAR}, #{profitAppraisalSalary,jdbcType=VARCHAR}, 
+      #{returnPay,jdbcType=VARCHAR}, #{deliveryPay,jdbcType=VARCHAR}, #{currentMonthSize,jdbcType=VARCHAR}, 
+      #{currentMonthOutputSize,jdbcType=VARCHAR}, #{monthTargetSize,jdbcType=VARCHAR}, 
+      #{currentMonthMoney,jdbcType=VARCHAR}, #{currentMonthOutputMoney,jdbcType=VARCHAR}, 
+      #{monthTargetMoney,jdbcType=VARCHAR}, #{pricePerTon,jdbcType=VARCHAR}, #{totalOrderSize,jdbcType=VARCHAR}, 
+      #{yearTargetSize,jdbcType=VARCHAR}, #{totalOrderMoney,jdbcType=VARCHAR}, #{yearTargetMoney,jdbcType=VARCHAR}, 
+      #{totalOutputSize,jdbcType=VARCHAR}, #{totalOutputMoney,jdbcType=VARCHAR}, #{totalReturnMoney,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sss.calculator.model.FieldVariableRef">
+    insert into ERP_HR_DF_FIELD_VARIABLE_REF
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderAppraisalSalary != null">
+        ORDER_APPRAISAL_SALARY,
+      </if>
+      <if test="profitAppraisalSalary != null">
+        PROFIT_APPRAISAL_SALARY,
+      </if>
+      <if test="returnPay != null">
+        RETURN_PAY,
+      </if>
+      <if test="deliveryPay != null">
+        DELIVERY_PAY,
+      </if>
+      <if test="currentMonthSize != null">
+        CURRENT_MONTH_SIZE,
+      </if>
+      <if test="currentMonthOutputSize != null">
+        CURRENT_MONTH_OUTPUT_SIZE,
+      </if>
+      <if test="monthTargetSize != null">
+        MONTH_TARGET_SIZE,
+      </if>
+      <if test="currentMonthMoney != null">
+        CURRENT_MONTH_MONEY,
+      </if>
+      <if test="currentMonthOutputMoney != null">
+        CURRENT_MONTH_OUTPUT_MONEY,
+      </if>
+      <if test="monthTargetMoney != null">
+        MONTH_TARGET_MONEY,
+      </if>
+      <if test="pricePerTon != null">
+        PRICE_PER_TON,
+      </if>
+      <if test="totalOrderSize != null">
+        TOTAL_ORDER_SIZE,
+      </if>
+      <if test="yearTargetSize != null">
+        YEAR_TARGET_SIZE,
+      </if>
+      <if test="totalOrderMoney != null">
+        TOTAL_ORDER_MONEY,
+      </if>
+      <if test="yearTargetMoney != null">
+        YEAR_TARGET_MONEY,
+      </if>
+      <if test="totalOutputSize != null">
+        TOTAL_OUTPUT_SIZE,
+      </if>
+      <if test="totalOutputMoney != null">
+        TOTAL_OUTPUT_MONEY,
+      </if>
+      <if test="totalReturnMoney != null">
+        TOTAL_RETURN_MONEY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderAppraisalSalary != null">
+        #{orderAppraisalSalary,jdbcType=VARCHAR},
+      </if>
+      <if test="profitAppraisalSalary != null">
+        #{profitAppraisalSalary,jdbcType=VARCHAR},
+      </if>
+      <if test="returnPay != null">
+        #{returnPay,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryPay != null">
+        #{deliveryPay,jdbcType=VARCHAR},
+      </if>
+      <if test="currentMonthSize != null">
+        #{currentMonthSize,jdbcType=VARCHAR},
+      </if>
+      <if test="currentMonthOutputSize != null">
+        #{currentMonthOutputSize,jdbcType=VARCHAR},
+      </if>
+      <if test="monthTargetSize != null">
+        #{monthTargetSize,jdbcType=VARCHAR},
+      </if>
+      <if test="currentMonthMoney != null">
+        #{currentMonthMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="currentMonthOutputMoney != null">
+        #{currentMonthOutputMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="monthTargetMoney != null">
+        #{monthTargetMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="pricePerTon != null">
+        #{pricePerTon,jdbcType=VARCHAR},
+      </if>
+      <if test="totalOrderSize != null">
+        #{totalOrderSize,jdbcType=VARCHAR},
+      </if>
+      <if test="yearTargetSize != null">
+        #{yearTargetSize,jdbcType=VARCHAR},
+      </if>
+      <if test="totalOrderMoney != null">
+        #{totalOrderMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="yearTargetMoney != null">
+        #{yearTargetMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="totalOutputSize != null">
+        #{totalOutputSize,jdbcType=VARCHAR},
+      </if>
+      <if test="totalOutputMoney != null">
+        #{totalOutputMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="totalReturnMoney != null">
+        #{totalReturnMoney,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sss.calculator.model.FieldVariableRefExample" resultType="java.lang.Long">
+    select count(*) from ERP_HR_DF_FIELD_VARIABLE_REF
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ERP_HR_DF_FIELD_VARIABLE_REF
+    <set>
+      <if test="record.orderAppraisalSalary != null">
+        ORDER_APPRAISAL_SALARY = #{record.orderAppraisalSalary,jdbcType=VARCHAR},
+      </if>
+      <if test="record.profitAppraisalSalary != null">
+        PROFIT_APPRAISAL_SALARY = #{record.profitAppraisalSalary,jdbcType=VARCHAR},
+      </if>
+      <if test="record.returnPay != null">
+        RETURN_PAY = #{record.returnPay,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deliveryPay != null">
+        DELIVERY_PAY = #{record.deliveryPay,jdbcType=VARCHAR},
+      </if>
+      <if test="record.currentMonthSize != null">
+        CURRENT_MONTH_SIZE = #{record.currentMonthSize,jdbcType=VARCHAR},
+      </if>
+      <if test="record.currentMonthOutputSize != null">
+        CURRENT_MONTH_OUTPUT_SIZE = #{record.currentMonthOutputSize,jdbcType=VARCHAR},
+      </if>
+      <if test="record.monthTargetSize != null">
+        MONTH_TARGET_SIZE = #{record.monthTargetSize,jdbcType=VARCHAR},
+      </if>
+      <if test="record.currentMonthMoney != null">
+        CURRENT_MONTH_MONEY = #{record.currentMonthMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="record.currentMonthOutputMoney != null">
+        CURRENT_MONTH_OUTPUT_MONEY = #{record.currentMonthOutputMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="record.monthTargetMoney != null">
+        MONTH_TARGET_MONEY = #{record.monthTargetMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pricePerTon != null">
+        PRICE_PER_TON = #{record.pricePerTon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalOrderSize != null">
+        TOTAL_ORDER_SIZE = #{record.totalOrderSize,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yearTargetSize != null">
+        YEAR_TARGET_SIZE = #{record.yearTargetSize,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalOrderMoney != null">
+        TOTAL_ORDER_MONEY = #{record.totalOrderMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yearTargetMoney != null">
+        YEAR_TARGET_MONEY = #{record.yearTargetMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalOutputSize != null">
+        TOTAL_OUTPUT_SIZE = #{record.totalOutputSize,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalOutputMoney != null">
+        TOTAL_OUTPUT_MONEY = #{record.totalOutputMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalReturnMoney != null">
+        TOTAL_RETURN_MONEY = #{record.totalReturnMoney,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ERP_HR_DF_FIELD_VARIABLE_REF
+    set ORDER_APPRAISAL_SALARY = #{record.orderAppraisalSalary,jdbcType=VARCHAR},
+      PROFIT_APPRAISAL_SALARY = #{record.profitAppraisalSalary,jdbcType=VARCHAR},
+      RETURN_PAY = #{record.returnPay,jdbcType=VARCHAR},
+      DELIVERY_PAY = #{record.deliveryPay,jdbcType=VARCHAR},
+      CURRENT_MONTH_SIZE = #{record.currentMonthSize,jdbcType=VARCHAR},
+      CURRENT_MONTH_OUTPUT_SIZE = #{record.currentMonthOutputSize,jdbcType=VARCHAR},
+      MONTH_TARGET_SIZE = #{record.monthTargetSize,jdbcType=VARCHAR},
+      CURRENT_MONTH_MONEY = #{record.currentMonthMoney,jdbcType=VARCHAR},
+      CURRENT_MONTH_OUTPUT_MONEY = #{record.currentMonthOutputMoney,jdbcType=VARCHAR},
+      MONTH_TARGET_MONEY = #{record.monthTargetMoney,jdbcType=VARCHAR},
+      PRICE_PER_TON = #{record.pricePerTon,jdbcType=VARCHAR},
+      TOTAL_ORDER_SIZE = #{record.totalOrderSize,jdbcType=VARCHAR},
+      YEAR_TARGET_SIZE = #{record.yearTargetSize,jdbcType=VARCHAR},
+      TOTAL_ORDER_MONEY = #{record.totalOrderMoney,jdbcType=VARCHAR},
+      YEAR_TARGET_MONEY = #{record.yearTargetMoney,jdbcType=VARCHAR},
+      TOTAL_OUTPUT_SIZE = #{record.totalOutputSize,jdbcType=VARCHAR},
+      TOTAL_OUTPUT_MONEY = #{record.totalOutputMoney,jdbcType=VARCHAR},
+      TOTAL_RETURN_MONEY = #{record.totalReturnMoney,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

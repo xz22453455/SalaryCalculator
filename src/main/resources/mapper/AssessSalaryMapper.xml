@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sss.calculator.dao.AssessSalaryDao" >
+  <resultMap id="BaseResultMap" type="com.sss.calculator.model.AssessSalary" >
+    <id column="JOBGRADE" property="jobgrade" jdbcType="VARCHAR" />
+    <id column="STAR_LEVEL" property="starLevel" jdbcType="VARCHAR" />
+    <id column="YEAR" property="year" jdbcType="VARCHAR" />
+    <id column="EXAMINATION_ITEM" property="examinationItem" jdbcType="VARCHAR" />
+    <result column="CATEGOTY" property="categoty" jdbcType="VARCHAR" />
+    <result column="ASSESSMENT_METHOD" property="assessmentMethod" jdbcType="VARCHAR" />
+    <result column="ALGORITHM" property="algorithm" jdbcType="VARCHAR" />
+    <result column="ASSESSMENT_SALARY" property="assessmentSalary" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    JOBGRADE, STAR_LEVEL, YEAR, EXAMINATION_ITEM, CATEGOTY, ASSESSMENT_METHOD, ALGORITHM, 
+    ASSESSMENT_SALARY
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sss.calculator.model.AssessSalaryExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ERP_HR_DF_ASSESS_SALARY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from ERP_HR_DF_ASSESS_SALARY
+    where JOBGRADE = #{jobgrade,jdbcType=VARCHAR}
+      and STAR_LEVEL = #{starLevel,jdbcType=VARCHAR}
+      and YEAR = #{year,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map" >
+    delete from ERP_HR_DF_ASSESS_SALARY
+    where JOBGRADE = #{jobgrade,jdbcType=VARCHAR}
+      and STAR_LEVEL = #{starLevel,jdbcType=VARCHAR}
+      and YEAR = #{year,jdbcType=VARCHAR}
+      and EXAMINATION_ITEM = #{examinationItem,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sss.calculator.model.AssessSalaryExample" >
+    delete from ERP_HR_DF_ASSESS_SALARY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sss.calculator.model.AssessSalary" >
+    insert into ERP_HR_DF_ASSESS_SALARY (JOBGRADE, STAR_LEVEL, YEAR, 
+      EXAMINATION_ITEM, CATEGOTY, ASSESSMENT_METHOD, 
+      ALGORITHM, ASSESSMENT_SALARY)
+    values (#{jobgrade,jdbcType=VARCHAR}, #{starLevel,jdbcType=VARCHAR}, #{year,jdbcType=VARCHAR}, 
+      #{examinationItem,jdbcType=VARCHAR}, #{categoty,jdbcType=VARCHAR}, #{assessmentMethod,jdbcType=VARCHAR}, 
+      #{algorithm,jdbcType=VARCHAR}, #{assessmentSalary,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sss.calculator.model.AssessSalary" >
+    insert into ERP_HR_DF_ASSESS_SALARY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="jobgrade != null" >
+        JOBGRADE,
+      </if>
+      <if test="starLevel != null" >
+        STAR_LEVEL,
+      </if>
+      <if test="year != null" >
+        YEAR,
+      </if>
+      <if test="examinationItem != null" >
+        EXAMINATION_ITEM,
+      </if>
+      <if test="categoty != null" >
+        CATEGOTY,
+      </if>
+      <if test="assessmentMethod != null" >
+        ASSESSMENT_METHOD,
+      </if>
+      <if test="algorithm != null" >
+        ALGORITHM,
+      </if>
+      <if test="assessmentSalary != null" >
+        ASSESSMENT_SALARY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="jobgrade != null" >
+        #{jobgrade,jdbcType=VARCHAR},
+      </if>
+      <if test="starLevel != null" >
+        #{starLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null" >
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="examinationItem != null" >
+        #{examinationItem,jdbcType=VARCHAR},
+      </if>
+      <if test="categoty != null" >
+        #{categoty,jdbcType=VARCHAR},
+      </if>
+      <if test="assessmentMethod != null" >
+        #{assessmentMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="algorithm != null" >
+        #{algorithm,jdbcType=VARCHAR},
+      </if>
+      <if test="assessmentSalary != null" >
+        #{assessmentSalary,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sss.calculator.model.AssessSalaryExample" resultType="java.lang.Integer" >
+    select count(*) from ERP_HR_DF_ASSESS_SALARY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ERP_HR_DF_ASSESS_SALARY
+    <set >
+      <if test="record.jobgrade != null" >
+        JOBGRADE = #{record.jobgrade,jdbcType=VARCHAR},
+      </if>
+      <if test="record.starLevel != null" >
+        STAR_LEVEL = #{record.starLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.year != null" >
+        YEAR = #{record.year,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examinationItem != null" >
+        EXAMINATION_ITEM = #{record.examinationItem,jdbcType=VARCHAR},
+      </if>
+      <if test="record.categoty != null" >
+        CATEGOTY = #{record.categoty,jdbcType=VARCHAR},
+      </if>
+      <if test="record.assessmentMethod != null" >
+        ASSESSMENT_METHOD = #{record.assessmentMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.algorithm != null" >
+        ALGORITHM = #{record.algorithm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.assessmentSalary != null" >
+        ASSESSMENT_SALARY = #{record.assessmentSalary,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ERP_HR_DF_ASSESS_SALARY
+    set JOBGRADE = #{record.jobgrade,jdbcType=VARCHAR},
+      STAR_LEVEL = #{record.starLevel,jdbcType=VARCHAR},
+      YEAR = #{record.year,jdbcType=VARCHAR},
+      EXAMINATION_ITEM = #{record.examinationItem,jdbcType=VARCHAR},
+      CATEGOTY = #{record.categoty,jdbcType=VARCHAR},
+      ASSESSMENT_METHOD = #{record.assessmentMethod,jdbcType=VARCHAR},
+      ALGORITHM = #{record.algorithm,jdbcType=VARCHAR},
+      ASSESSMENT_SALARY = #{record.assessmentSalary,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sss.calculator.model.AssessSalary" >
+    update ERP_HR_DF_ASSESS_SALARY
+    <set >
+      <if test="categoty != null" >
+        CATEGOTY = #{categoty,jdbcType=VARCHAR},
+      </if>
+      <if test="assessmentMethod != null" >
+        ASSESSMENT_METHOD = #{assessmentMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="algorithm != null" >
+        ALGORITHM = #{algorithm,jdbcType=VARCHAR},
+      </if>
+      <if test="assessmentSalary != null" >
+        ASSESSMENT_SALARY = #{assessmentSalary,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where JOBGRADE = #{jobgrade,jdbcType=VARCHAR}
+      and STAR_LEVEL = #{starLevel,jdbcType=VARCHAR}
+      and YEAR = #{year,jdbcType=VARCHAR}
+      and EXAMINATION_ITEM = #{examinationItem,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sss.calculator.model.AssessSalary" >
+    update ERP_HR_DF_ASSESS_SALARY
+    set CATEGOTY = #{categoty,jdbcType=VARCHAR},
+      ASSESSMENT_METHOD = #{assessmentMethod,jdbcType=VARCHAR},
+      ALGORITHM = #{algorithm,jdbcType=VARCHAR},
+      ASSESSMENT_SALARY = #{assessmentSalary,jdbcType=VARCHAR}
+    where JOBGRADE = #{jobgrade,jdbcType=VARCHAR}
+      and STAR_LEVEL = #{starLevel,jdbcType=VARCHAR}
+      and YEAR = #{year,jdbcType=VARCHAR}
+      and EXAMINATION_ITEM = #{examinationItem,jdbcType=VARCHAR}
+  </update>
+</mapper>
