@@ -43,7 +43,17 @@ public class TaskScheduler {
         //saleInfoService.historySaleInfo();
         //获取当前信息接口
         saleInfoService.findSaleInfo();
-        final ArrayList<SaleInfo> saleInfos = saleInfoService.selectSaleInfo(new SaleInfoExample());
+        int monthValue = LocalDate.now().getMonthValue();
+        String month;
+        int months = 10;
+        if (monthValue < months) {
+            month = "0" + monthValue;
+        } else {
+            month = String.valueOf(monthValue);
+        }
+        SaleInfoExample saleInfoExample = new SaleInfoExample();
+        saleInfoExample.createCriteria().andYearEqualTo(String.valueOf(LocalDate.now().getYear())).andMonthEqualTo(String.valueOf(month));
+        final ArrayList<SaleInfo> saleInfos = saleInfoService.selectSaleInfo(saleInfoExample);
         //遍历员工对象
         long startTime = System.currentTimeMillis();
         Map<String, String> hashMap = new HashMap<>(30);
