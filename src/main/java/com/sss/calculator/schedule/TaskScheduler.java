@@ -3,8 +3,6 @@ package com.sss.calculator.schedule;
 import com.sss.calculator.model.*;
 import com.sss.calculator.service.*;
 import com.sss.calculator.utils.CalculationEngine;
-import com.sss.calculator.utils.LoggerUtils;
-import org.hibernate.validator.internal.util.logging.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +17,7 @@ import java.util.*;
 /**
  * 〈quartz定时任务执行类〉<br>
  *
- * @author
+ * @author wangcm
  * @since 1.0.0
  */
 @Component

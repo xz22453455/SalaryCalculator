@@ -1,7 +1,7 @@
 /**
  * Copyright (C), 2015-2019, XXX有限公司
  * FileName: SaleInfoServiceImpl
- * Author:   Administrator
+ * Author:   wangcm
  * Date:     2019/1/15 0015 15:19
  * Description:
  * History:
@@ -27,7 +27,8 @@ import java.util.concurrent.*;
 
 /**
  * 〈获取员工信息〉<br>
- * @author mao
+ *
+ * @author wangcm
  * @create 2019/1/16 0016
  * @since 1.0.0
  */
@@ -42,21 +43,25 @@ public class SaleInfoServiceImpl implements SaleInfoService {
     @Autowired
     ExecutorService executorService;
     private LoggerUtils logger = LoggerUtils.getLogger(SaleInfoServiceImpl.class);
+
     @Override
     public ArrayList<SaleInfo> selectSaleInfo(SaleInfoExample example) {
         return saleInfoDao.selectByExample(example);
     }
+
     @Override
     public List<Employee> getAllEmployee() {
         EmployeeExample example = new EmployeeExample();
         example.createCriteria().andDepartmentLike("%销%").andWorkingStateEqualTo("在职");
         return employeeDao.selectByExample(example);
     }
+
     List<SaleInfo> saleInfos = new ArrayList<>();
     LocalDate yesterday = LocalDate.now().minusDays(1);
     int year = yesterday.getYear();
     int mathMonth = yesterday.getMonthValue();
     String month;
+
     String getMonth() {
         int months = 10;
         if (mathMonth < months) {
@@ -66,6 +71,7 @@ public class SaleInfoServiceImpl implements SaleInfoService {
         }
         return month;
     }
+
     @Override
     public void findSaleInfo() {
         getMonth();
@@ -74,7 +80,9 @@ public class SaleInfoServiceImpl implements SaleInfoService {
         List<PostRank> postrank = postRankService.selectByPostRankExample(postRankExample);
         ExecutorService service = Executors.newFixedThreadPool(10);
         long startTime = System.currentTimeMillis();
-        for (int i = 3; i > 0; i--) {
+        //等级个数
+        int i;
+        for (i = 3; i > 0; i--) {
             int count = 0;
             CompletionService<String> completionService = new ExecutorCompletionService(service);
             for (int j = 0; j < employees.size() - 1; j++) {
@@ -82,7 +90,7 @@ public class SaleInfoServiceImpl implements SaleInfoService {
                 if (i == 3) {
                     count++;
                     logger.debug("------------********创建普通员工Task*********--------------");
-                    GetContentTask getContentTask = new SaleInfoServiceImpl.GetContentTask(employee, i);
+                    GetContentTask getContentTask = new SaleInfoServiceImpl.GetContentTask(employee, i, year, month);
 
                     logger.debug("------------********提交Callable类型的普通task任务*********--------------");
                     completionService.submit(getContentTask);
@@ -93,7 +101,7 @@ public class SaleInfoServiceImpl implements SaleInfoService {
                     if (employee.getPost().equals(postRank.getPost())) {
                         count++;
                         logger.debug("------------********创建中级员工Task*********--------------");
-                        GetContentTask getContentTask = new SaleInfoServiceImpl.GetContentTask(employee, i);
+                        GetContentTask getContentTask = new SaleInfoServiceImpl.GetContentTask(employee, i, year, month);
                         logger.debug("------------********提交Callable类型的中级task任务*********--------------");
                         completionService.submit(getContentTask);
                     }
@@ -104,7 +112,7 @@ public class SaleInfoServiceImpl implements SaleInfoService {
                     if (employee.getPost().equals(postRank.getPost())) {
                         count++;
                         logger.debug("------------********创建高级员工Task*********--------------");
-                        GetContentTask getContentTask = new SaleInfoServiceImpl.GetContentTask(employee, i);
+                        GetContentTask getContentTask = new SaleInfoServiceImpl.GetContentTask(employee, i, year, month);
                         logger.debug("------------********提交Callable类型的高级task任务*********--------------");
                         completionService.submit(getContentTask);
                     }
@@ -125,10 +133,12 @@ public class SaleInfoServiceImpl implements SaleInfoService {
         long endTime = System.currentTimeMillis();
         logger.info("查询耗时 : " + (endTime - startTime));
     }
+
     @Override
     public List<SaleInfo> selectByExample(SaleInfoExample example) {
         return null;
     }
+
     @Override
     public void timeUpdateOrInsert(List<SaleInfo> saleInfos) {
         //获取前一天日期
@@ -139,33 +149,24 @@ public class SaleInfoServiceImpl implements SaleInfoService {
         }
         logger.debug("------------------------" + yesterday + "全部数据更新完成------------------------");
     }
+
     //Callable接口代表一段可以调用并返回结果的代码;Future接口表示异步任务，
     // 是还没有完成的任务给出的未来结果。所以说Callable用于产生结果，Future用于获取结果。
     class GetContentTask implements Callable<String> {
         private Employee employee;
-        private int num;
+        private String month;
+        private Integer year;
+        private Integer num;
 
-        public GetContentTask(Employee employee, int num) {
+        public GetContentTask(Employee employee, int num, Integer year, String month) {
             this.employee = employee;
             this.num = num;
+            this.year = year;
+            this.month = month;
         }
-        LocalDate yesterday = LocalDate.now().minusDays(1);
-        int year = yesterday.getYear();
-        int mathMonth = yesterday.getMonthValue();
-        String month;
 
-        String getMonth() {
-            int months = 10;
-            if (mathMonth < months) {
-                month = "0" + mathMonth;
-            } else {
-                month = String.valueOf(mathMonth);
-            }
-            return month;
-        }
         @Override
         public String call() {
-            getMonth();
             if (num == 3) {
                 logger.debug("------------********计算最小职位*********--------------");
                 calcuBase(employee);
@@ -180,9 +181,9 @@ public class SaleInfoServiceImpl implements SaleInfoService {
             }
             return "当前线程:" + Thread.currentThread().getName() + "this is content : hello " + employee.getName() + "获取完毕";
         }
+
         public void calcuBase(Employee employee) {
             logger.debug("------------********实际计算" + employee.getPost() + "*********--------------");
-            getMonth();
             SaleInfo saleInfo = new SaleInfo();
             saleInfo.setEmployeeNo(employee.getEmployeeNo());
             saleInfo.setYear(String.valueOf(year));
@@ -235,8 +236,8 @@ public class SaleInfoServiceImpl implements SaleInfoService {
             saleInfo.setTotalReturnMoney(new BigDecimal(totalReturnMoney == null ? "0" : totalReturnMoney));
             saleInfos.add(saleInfo);
         }
+
         public void calcuMid(Employee employee, ArrayList<HashMap<String, Object>> findall) {
-            getMonth();
             SaleInfo saleInfo = new SaleInfo();
             HashMap<String, Object> hashMap = findall.get(0);
             saleInfo.setEmployeeNo(employee.getEmployeeNo());
@@ -248,32 +249,37 @@ public class SaleInfoServiceImpl implements SaleInfoService {
             Iterator<Map.Entry<String, Object>> it = hashMap.entrySet().iterator();
             while (it.hasNext()) {
                 Map.Entry<String, Object> entry = it.next();
+                //累计订单量
                 if ("TOTAL_ORDER_SIZE".equals(entry.getKey())) {
                     logger.debug(String.valueOf(String.valueOf(entry.getValue())));
-
                     saleInfo.setTotalOrderSize(new BigDecimal(String.valueOf(String.valueOf(entry.getValue())) == null ? "0" : String.valueOf(String.valueOf(entry.getValue()))));
                 }
+                //年目标量
                 if ("YEAR_TARGET_SIZE".equals(entry.getKey())) {
                     logger.debug(String.valueOf(String.valueOf(entry.getValue())));
                     saleInfo.setYearTargetSize(new BigDecimal(String.valueOf(String.valueOf(entry.getValue())) == null ? "0" : String.valueOf(String.valueOf(entry.getValue()))));
                 }
+                //年订单额
                 if ("TOTAL_ORDER_MONEY".equals(entry.getKey())) {
                     logger.debug(String.valueOf(String.valueOf(entry.getValue())));
-                    //当月订单量
                     saleInfo.setTotalOrderMoney(new BigDecimal(String.valueOf(String.valueOf(entry.getValue())) == null ? "0" : String.valueOf(String.valueOf(entry.getValue()))));
                 }
+                //年目标额
                 if ("YEAR_TARGET_MONEY".equals(entry.getKey())) {
                     logger.debug(String.valueOf(String.valueOf(entry.getValue())));
                     saleInfo.setYearTargetMoney(new BigDecimal(String.valueOf(String.valueOf(entry.getValue())) == null ? "0" : String.valueOf(entry.getValue())));
                 }
+                //当月订单量
                 if ("CURRENT_MONTH_SIZE".equals(entry.getKey())) {
                     logger.debug(String.valueOf(entry.getValue()));
                     saleInfo.setCurrentMonthSize(new BigDecimal(String.valueOf(entry.getValue()) == null ? "0" : String.valueOf(entry.getValue())));
                 }
+                //当月目标量
                 if ("MONTH_TARGET_SIZE".equals(entry.getKey())) {
                     logger.debug(String.valueOf(entry.getValue()));
                     saleInfo.setMonthTargetSize(new BigDecimal(String.valueOf(entry.getValue()) == null ? "0" : String.valueOf(entry.getValue())));
                 }
+                //当月订单额
                 if ("CURRENT_MONTH_MONEY".equals(entry.getKey())) {
                     logger.debug(String.valueOf(entry.getValue()));
                     String.valueOf(entry.getValue());
@@ -285,31 +291,37 @@ public class SaleInfoServiceImpl implements SaleInfoService {
                     saleInfo.setCurrentMonthMoney(bigDecimal);
                     logger.debug(String.valueOf(entry.getValue()));
                 }
+                //月目标额
                 if ("MONTH_TARGET_MONEY".equals(entry.getKey())) {
                     logger.debug(String.valueOf(entry.getValue()));
                     saleInfo.setMonthTargetMoney(new BigDecimal(String.valueOf(entry.getValue()) == null ? "0" : String.valueOf(entry.getValue())));
                 }
+                //累计出库量
                 if ("TOTAL_OUTPUT_SIZE".equals(entry.getKey())) {
                     logger.debug(String.valueOf(entry.getValue()));
                     saleInfo.setTotalOutputSize(new BigDecimal(String.valueOf(entry.getValue()) == null ? "0" : String.valueOf(entry.getValue())));
                 }
+                //吨钢加价
                 if ("PRICE_PER_TON".equals(entry.getKey())) {
                     logger.debug(String.valueOf(entry.getValue()));
                     saleInfo.setPricePerTon(new BigDecimal(String.valueOf(entry.getValue()) == null ? "0" : String.valueOf(entry.getValue())));
                 }
+                //累计出库额
                 if ("TOTAL_OUTPUT_MONEY".equals(entry.getKey())) {
                     logger.debug(String.valueOf(entry.getValue()));
-                    //当月订单量
                     saleInfo.setTotalOutputMoney(new BigDecimal(String.valueOf(entry.getValue()) == null ? "0" : String.valueOf(entry.getValue())));
                 }
+                //累计回款额
                 if ("TOTAL_RETURN_MONEY".equals(entry.getKey())) {
                     logger.debug(String.valueOf(entry.getValue()));
                     saleInfo.setTotalReturnMoney(new BigDecimal(String.valueOf(entry.getValue()) == null ? "0" : String.valueOf(entry.getValue())));
                 }
+                //当月出库量
                 if ("CURRENT_MONTH_OUTPUT_SIZE".equals(entry.getKey())) {
                     logger.debug(String.valueOf(entry.getValue()));
                     saleInfo.setCurrentMonthOutputSize(new BigDecimal(String.valueOf(entry.getValue()) == null ? "0" : String.valueOf(entry.getValue())));
                 }
+                //当月出库额
                 if ("CURRENT_MONTH_OUTPUT_MONEY".equals(entry.getKey())) {
                     logger.debug(String.valueOf(entry.getValue()));
                     saleInfo.setCurrentMonthOutputMoney(new BigDecimal(String.valueOf(entry.getValue()) == null ? "0" : String.valueOf(entry.getValue())));
@@ -317,39 +329,45 @@ public class SaleInfoServiceImpl implements SaleInfoService {
             }
             saleInfos.add(saleInfo);
         }
+
         public void calcuTop(Employee employee, ArrayList<HashMap<String, Object>> findall) {
-            SaleInfoExample saleInfoExample = new SaleInfoExample();
-            saleInfoExample.createCriteria().andEmployeeNoEqualTo(employee.getEmployeeNo());
-            List<SaleInfo> findmyself = saleInfoDao.selectByExample(saleInfoExample);
-            SaleInfo saleInfo1 = findmyself.get(0);
-            getMonth();
             SaleInfo saleInfo = new SaleInfo();
             HashMap<String, Object> hashMap = findall.get(0);
+            SaleInfoExample saleInfoExample = new SaleInfoExample();
+            saleInfoExample.createCriteria().andEmployeeNoEqualTo(employee.getEmployeeNo()).andYearEqualTo(hashMap.get("YEAR").toString()).andMonthEqualTo(hashMap.get("MONTH").toString());
+            ArrayList<SaleInfo> saleInfos = saleInfoDao.selectByExample(saleInfoExample);
+            SaleInfo saleInfo2 = saleInfos.get(0);
             saleInfo.setEmployeeNo(employee.getEmployeeNo());
             saleInfo.setYear(String.valueOf(year));
             saleInfo.setMonth(month);
             saleInfo.setDepartment(employee.getDepartment());
             saleInfo.setPost(employee.getPost());
             saleInfo.setPostLevel(String.valueOf(employee.getPostLevel()));
+            //年目标量
+            saleInfo.setYearTargetSize(saleInfo2.getYearTargetSize());
+            //年目标额
+            saleInfo.setYearTargetMoney(saleInfo2.getYearTargetMoney());
+            //月目标额
+            saleInfo.setMonthTargetMoney(saleInfo2.getMonthTargetMoney());
+            //当月目标量
+            saleInfo.setMonthTargetSize(saleInfo2.getMonthTargetSize());
             Iterator<Map.Entry<String, Object>> it = hashMap.entrySet().iterator();
             while (it.hasNext()) {
                 Map.Entry<String, Object> entry = it.next();
+
                 if ("TOTAL_ORDER_SIZE".equals(entry.getKey())) {
                     logger.debug(String.valueOf(String.valueOf(entry.getValue())));
                     saleInfo.setTotalOrderSize(new BigDecimal(String.valueOf(String.valueOf(entry.getValue())) == null ? "0" : String.valueOf(String.valueOf(entry.getValue()))));
                 }
-                saleInfo.setYearTargetSize(saleInfo1.getYearTargetSize());
                 if ("TOTAL_ORDER_MONEY".equals(entry.getKey())) {
                     logger.debug(String.valueOf(String.valueOf(entry.getValue())));
                     //当月订单量
                     saleInfo.setTotalOrderMoney(new BigDecimal(String.valueOf(String.valueOf(entry.getValue())) == null ? "0" : String.valueOf(String.valueOf(entry.getValue()))));
                 }
-                saleInfo.setYearTargetMoney(saleInfo1.getYearTargetMoney());
                 if ("CURRENT_MONTH_SIZE".equals(entry.getKey())) {
                     logger.debug(String.valueOf(entry.getValue()));
                     saleInfo.setCurrentMonthSize(new BigDecimal(String.valueOf(entry.getValue()) == null ? "0" : String.valueOf(entry.getValue())));
                 }
-                saleInfo.setMonthTargetSize(saleInfo1.getMonthTargetSize());
                 if ("CURRENT_MONTH_MONEY".equals(entry.getKey())) {
                     logger.debug(String.valueOf(entry.getValue()));
                     String.valueOf(entry.getValue());
@@ -361,7 +379,6 @@ public class SaleInfoServiceImpl implements SaleInfoService {
                     saleInfo.setCurrentMonthMoney(bigDecimal);
                     logger.debug(String.valueOf(entry.getValue()));
                 }
-                saleInfo.setMonthTargetMoney(saleInfo1.getMonthTargetMoney());
                 if ("TOTAL_OUTPUT_SIZE".equals(entry.getKey())) {
                     logger.debug(String.valueOf(entry.getValue()));
                     saleInfo.setTotalOutputSize(new BigDecimal(String.valueOf(entry.getValue()) == null ? "0" : String.valueOf(entry.getValue())));
@@ -388,7 +405,7 @@ public class SaleInfoServiceImpl implements SaleInfoService {
                     saleInfo.setCurrentMonthOutputMoney(new BigDecimal(String.valueOf(entry.getValue()) == null ? "0" : String.valueOf(entry.getValue())));
                 }
             }
-            saleInfos.add(saleInfo);
+            SaleInfoServiceImpl.this.saleInfos.add(saleInfo);
         }
     }
 }

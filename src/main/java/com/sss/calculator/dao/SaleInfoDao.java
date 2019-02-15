@@ -33,7 +33,7 @@ public interface SaleInfoDao {
             "\t\"SUM\" (INFO.YEAR_TARGET_SIZE) YEAR_TARGET_SIZE,\n" +
             "\t\"SUM\" (INFO.TOTAL_ORDER_MONEY) TOTAL_ORDER_MONEY,\n" +
             "\t\"SUM\" (INFO.YEAR_TARGET_MONEY) YEAR_TARGET_MONEY,\n" +
-            "\t\"SUM\" (INFO.CURRENT_MONTH_SIZE) CURRENT_MONTH_SIZE,\n" +
+            "\t\"SUM\" (CURRENT_MONTH_SIZE) CURRENT_MONTH_SIZE,\n" +
             "\t\"SUM\" (INFO.MONTH_TARGET_SIZE) MONTH_TARGET_SIZE,\n" +
             "\t\"SUM\" (INFO.CURRENT_MONTH_MONEY) CURRENT_MONTH_MONEY,\n" +
             "\t\"SUM\" (INFO.MONTH_TARGET_MONEY) MONTH_TARGET_MONEY,\n" +
@@ -51,10 +51,12 @@ public interface SaleInfoDao {
             "\tERP_SD_T_SALE_INFO info\n" +
             "LEFT JOIN ERP_HR_DF_EMPLOYEE emp ON INFO.EMPLOYEE_NO = EMP.EMPLOYEE_NO\n" +
             "WHERE\n" +
-            "\tINFO.EMPLOYEE_NO = #{id}\n" +
-            "OR EMP.DIRECT_SUPERVISOR_ID =#{id}\n" +
+            "\t(INFO.EMPLOYEE_NO = #{id}\n" +
+            "\tAND INFO.\"YEAR\" = #{year}\n" +
+            "AND INFO.\"MONTH\" = #{month})\n" +
+            "or (EMP.DIRECT_SUPERVISOR_ID = #{id}\n" +
             "AND INFO.\"YEAR\" = #{year}\n" +
-            "AND INFO.\"MONTH\" = #{month}\n" +
+            "AND INFO.\"MONTH\" = #{month})\n" +
             "GROUP BY\n" +
             "\tINFO.\"YEAR\",\n" +
             "\tINFO.\"MONTH\"")

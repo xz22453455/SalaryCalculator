@@ -1,7 +1,7 @@
 /**
  * Copyright (C), 2015-2019, XXX有限公司
  * FileName: FieldVariableRefService
- * Author:   Administrator
+ * Author:   wangcm
  * Date:     2019/1/17 0017 11:15
  * Description:
  * History:
@@ -16,7 +16,7 @@ import com.sss.calculator.model.FieldVariableRef;
  * 〈一句话功能简述〉<br> 
  * 〈〉
  *
- * @author Administrator
+ * @author wangcm
  * @create 2019/1/17 0017
  * @since 1.0.0
  */

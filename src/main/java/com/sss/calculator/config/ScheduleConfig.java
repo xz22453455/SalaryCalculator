@@ -1,7 +1,7 @@
 /**
  * Copyright (C), 2015-2018, XXX有限公司
  * FileName: ScheduleConfig
- * Author:   Administrator
+ * Author:   wangcm
  * Date:     2018/12/19 0019 15:08
  * Description:
  * History:

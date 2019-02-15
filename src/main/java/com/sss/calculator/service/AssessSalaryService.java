@@ -1,7 +1,7 @@
 /**
  * Copyright (C), 2015-2019, XXX有限公司
  * FileName: AssessSalaryService
- * Author:   Administrator
+ * Author:   wangcm
  * Date:     2019/1/15 0015 14:26
  * Description:
  * History:
@@ -18,7 +18,7 @@ import java.util.ArrayList;
  * 〈一句话功能简述〉<br> 
  * 〈〉
  *
- * @author Administrator
+ * @author wangcm
  * @create 2019/1/15 0015
  * @since 1.0.0
  */

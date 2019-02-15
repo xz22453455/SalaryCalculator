@@ -1,7 +1,7 @@
 /**
  * Copyright (C), 2015-2019, XXX有限公司
  * FileName: FieldVariableRefServiceImpl
- * Author:   Administrator
+ * Author:   wangcm
  * Date:     2019/1/17 0017 11:17
  * Description:
  * History:
@@ -21,7 +21,7 @@ import javax.annotation.Resource;
  * 〈获取字段对应算法变量〉<br>
  * 〈〉
  *
- * @author Administrator
+ * @author wangcm
  * @create 2019/1/17 0017
  * @since 1.0.0
  */

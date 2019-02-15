@@ -1,7 +1,7 @@
 /**
  * Copyright (C), 2015-2019, XXX有限公司
  * FileName: PostRankServiceImpl
- * Author:   Administrator
+ * Author:   wangcm
  * Date:     2019/1/26 0026 10:01
  * Description:
  * History:
@@ -23,7 +23,7 @@ import java.util.List;
  * 〈一句话功能简述〉<br> 
  * 〈〉
  *
- * @author Administrator
+ * @author wangcm
  * @create 2019/1/26 0026
  * @since 1.0.0
  */

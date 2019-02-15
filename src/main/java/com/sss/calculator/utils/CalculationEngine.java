@@ -14,7 +14,7 @@ import java.util.Map.Entry;
  * 〈获取单例进行python脚本调用〉<br>
  * 〈〉
  *
- * @author Administrator
+ * @author wangcm
  * @create 2019/1/15 0015
  * @since 1.0.0
  */

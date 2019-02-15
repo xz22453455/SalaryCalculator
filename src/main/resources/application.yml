@@ -51,4 +51,3 @@ spring:
 mybatis:
   mapper-locations: classpath*:mapper/*.xml
 pythonScript-path: D:/PythonScript.py
-

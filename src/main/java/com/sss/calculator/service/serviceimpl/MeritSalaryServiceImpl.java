@@ -1,7 +1,7 @@
 /**
  * Copyright (C), 2015-2019, XXX有限公司
  * FileName: MeritSalaryServiceImpl
- * Author:   Administrator
+ * Author:   wangcm
  * Date:     2019/1/16 0016 9:32
  * Description:
  * History:
@@ -21,7 +21,7 @@ import javax.annotation.Resource;
  * 〈插入计算结果〉<br>
  * 〈〉
  *
- * @author Administrator
+ * @author wangcm
  * @create 2019/1/16 0016
  * @since 1.0.0
  */
