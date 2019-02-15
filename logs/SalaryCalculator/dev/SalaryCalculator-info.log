@@ -296,3 +296,388 @@
 2019-02-15 16:29:27.294  INFO 4608 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 查询耗时 : 101747
 2019-02-15 16:29:52.046  INFO 4608 --- [pool-2-thread-1] c.sss.calculator.schedule.TaskScheduler  : 封装计算插入耗时 : 3422
 2019-02-15 16:29:52.048  INFO 4608 --- [pool-2-thread-1] c.sss.calculator.schedule.TaskScheduler  : 本月截止到:2019-02-14,全部数据计算更新完成，薪资计算时间为:2019-02-15T16:29:52.048
+2019-02-15 17:00:25.981  INFO 13268 --- [main] c.s.c.SalaryCalculatorApplication        : Starting SalaryCalculatorApplication on WIN-2QVTEVGADPV with PID 13268 (D:\idea-workspace\SalaryCalculator\target\classes started by Administrator in D:\idea-workspace\SalaryCalculator)
+2019-02-15 17:00:25.984  INFO 13268 --- [main] c.s.c.SalaryCalculatorApplication        : The following profiles are active: dev
+2019-02-15 17:00:27.357  INFO 13268 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-02-15 17:00:27.386  INFO 13268 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-02-15 17:00:27.387  INFO 13268 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.14]
+2019-02-15 17:00:27.393  INFO 13268 --- [main] o.a.catalina.core.AprLifecycleListener   : An older version [1.2.16] of the APR based Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [1.2.19]
+2019-02-15 17:00:27.393  INFO 13268 --- [main] o.a.catalina.core.AprLifecycleListener   : Loaded APR based Apache Tomcat Native library [1.2.16] using APR version [1.6.3].
+2019-02-15 17:00:27.394  INFO 13268 --- [main] o.a.catalina.core.AprLifecycleListener   : APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+2019-02-15 17:00:27.394  INFO 13268 --- [main] o.a.catalina.core.AprLifecycleListener   : APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+2019-02-15 17:00:28.419  INFO 13268 --- [main] o.a.catalina.core.AprLifecycleListener   : OpenSSL successfully initialized [OpenSSL 1.0.2m  2 Nov 2017]
+2019-02-15 17:00:28.524  INFO 13268 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-02-15 17:00:28.524  INFO 13268 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2454 ms
+2019-02-15 17:00:29.629  INFO 13268 --- [main] org.quartz.impl.StdSchedulerFactory      : Using default implementation for ThreadExecutor
+2019-02-15 17:00:29.644  INFO 13268 --- [main] org.quartz.core.SchedulerSignalerImpl    : Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2019-02-15 17:00:29.644  INFO 13268 --- [main] org.quartz.core.QuartzScheduler          : Quartz Scheduler v.2.3.0 created.
+2019-02-15 17:00:29.645  INFO 13268 --- [main] org.quartz.simpl.RAMJobStore             : RAMJobStore initialized.
+2019-02-15 17:00:29.646  INFO 13268 --- [main] org.quartz.core.QuartzScheduler          : Scheduler meta-data: Quartz Scheduler (v2.3.0) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2019-02-15 17:00:29.646  INFO 13268 --- [main] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2019-02-15 17:00:29.646  INFO 13268 --- [main] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler version: 2.3.0
+2019-02-15 17:00:29.646  INFO 13268 --- [main] org.quartz.core.QuartzScheduler          : JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@6a282fdd
+2019-02-15 17:00:29.696  INFO 13268 --- [main] o.s.s.quartz.SchedulerFactoryBean        : Starting Quartz Scheduler now
+2019-02-15 17:00:29.696  INFO 13268 --- [main] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2019-02-15 17:00:29.738  INFO 13268 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-02-15 17:00:29.742  INFO 13268 --- [main] c.s.c.SalaryCalculatorApplication        : Started SalaryCalculatorApplication in 4.476 seconds (JVM running for 5.052)
+2019-02-15 17:00:33.785  INFO 13268 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 查询耗时 : 3633
+2019-02-15 17:00:36.910  INFO 13268 --- [pool-2-thread-1] c.sss.calculator.schedule.TaskScheduler  : 封装计算插入耗时 : 3114
+2019-02-15 17:00:36.912  INFO 13268 --- [pool-2-thread-1] c.sss.calculator.schedule.TaskScheduler  : 本月截止到:2019-02-14,全部数据计算更新完成，薪资计算时间为:2019-02-15T17:00:36.912
+2019-02-15 17:00:43.727  INFO 13268 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 查询耗时 : 3710
+2019-02-15 17:00:47.019  INFO 13268 --- [pool-2-thread-1] c.sss.calculator.schedule.TaskScheduler  : 封装计算插入耗时 : 3283
+2019-02-15 17:00:47.020  INFO 13268 --- [pool-2-thread-1] c.sss.calculator.schedule.TaskScheduler  : 本月截止到:2019-02-14,全部数据计算更新完成，薪资计算时间为:2019-02-15T17:00:47.020
+2019-02-15 17:00:53.461  INFO 13268 --- [pool-2-thread-2] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 查询耗时 : 3452
+2019-02-15 17:00:56.871  INFO 13268 --- [pool-2-thread-2] c.sss.calculator.schedule.TaskScheduler  : 封装计算插入耗时 : 3404
+2019-02-15 17:00:56.872  INFO 13268 --- [pool-2-thread-2] c.sss.calculator.schedule.TaskScheduler  : 本月截止到:2019-02-14,全部数据计算更新完成，薪资计算时间为:2019-02-15T17:00:56.872
+2019-02-15 17:01:03.822  INFO 13268 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 查询耗时 : 3807
+2019-02-15 17:01:07.564  INFO 13268 --- [pool-2-thread-1] c.sss.calculator.schedule.TaskScheduler  : 封装计算插入耗时 : 3731
+2019-02-15 17:01:07.564  INFO 13268 --- [pool-2-thread-1] c.sss.calculator.schedule.TaskScheduler  : 本月截止到:2019-02-14,全部数据计算更新完成，薪资计算时间为:2019-02-15T17:01:07.564
+2019-02-15 17:08:42.344  INFO 11340 --- [main] c.s.c.SalaryCalculatorApplication        : Starting SalaryCalculatorApplication on WIN-2QVTEVGADPV with PID 11340 (D:\idea-workspace\SalaryCalculator\target\classes started by Administrator in D:\idea-workspace\SalaryCalculator)
+2019-02-15 17:08:42.348  INFO 11340 --- [main] c.s.c.SalaryCalculatorApplication        : The following profiles are active: dev
+2019-02-15 17:08:43.950  INFO 11340 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-02-15 17:08:43.980  INFO 11340 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-02-15 17:08:43.980  INFO 11340 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.14]
+2019-02-15 17:08:43.988  INFO 11340 --- [main] o.a.catalina.core.AprLifecycleListener   : An older version [1.2.16] of the APR based Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [1.2.19]
+2019-02-15 17:08:43.988  INFO 11340 --- [main] o.a.catalina.core.AprLifecycleListener   : Loaded APR based Apache Tomcat Native library [1.2.16] using APR version [1.6.3].
+2019-02-15 17:08:43.988  INFO 11340 --- [main] o.a.catalina.core.AprLifecycleListener   : APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+2019-02-15 17:08:43.988  INFO 11340 --- [main] o.a.catalina.core.AprLifecycleListener   : APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+2019-02-15 17:08:45.014  INFO 11340 --- [main] o.a.catalina.core.AprLifecycleListener   : OpenSSL successfully initialized [OpenSSL 1.0.2m  2 Nov 2017]
+2019-02-15 17:08:45.125  INFO 11340 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-02-15 17:08:45.125  INFO 11340 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2710 ms
+2019-02-15 17:08:46.437  INFO 11340 --- [main] org.quartz.impl.StdSchedulerFactory      : Using default implementation for ThreadExecutor
+2019-02-15 17:08:46.451  INFO 11340 --- [main] org.quartz.core.SchedulerSignalerImpl    : Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2019-02-15 17:08:46.452  INFO 11340 --- [main] org.quartz.core.QuartzScheduler          : Quartz Scheduler v.2.3.0 created.
+2019-02-15 17:08:46.453  INFO 11340 --- [main] org.quartz.simpl.RAMJobStore             : RAMJobStore initialized.
+2019-02-15 17:08:46.454  INFO 11340 --- [main] org.quartz.core.QuartzScheduler          : Scheduler meta-data: Quartz Scheduler (v2.3.0) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2019-02-15 17:08:46.454  INFO 11340 --- [main] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2019-02-15 17:08:46.454  INFO 11340 --- [main] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler version: 2.3.0
+2019-02-15 17:08:46.454  INFO 11340 --- [main] org.quartz.core.QuartzScheduler          : JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@576b7c74
+2019-02-15 17:08:46.512  INFO 11340 --- [main] o.s.s.quartz.SchedulerFactoryBean        : Starting Quartz Scheduler now
+2019-02-15 17:08:46.512  INFO 11340 --- [main] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2019-02-15 17:08:46.560  INFO 11340 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-02-15 17:08:46.565  INFO 11340 --- [main] c.s.c.SalaryCalculatorApplication        : Started SalaryCalculatorApplication in 5.066 seconds (JVM running for 5.814)
+2019-02-15 17:09:07.785  INFO 11340 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 查询耗时 : 17614
+2019-02-15 17:09:55.797  INFO 11340 --- [pool-2-thread-1] c.sss.calculator.schedule.TaskScheduler  : 封装计算插入耗时 : 41667
+2019-02-15 17:12:02.891  INFO 11340 --- [pool-2-thread-1] c.sss.calculator.schedule.TaskScheduler  : 本月截止到:2019-02-14,全部数据计算更新完成，薪资计算时间为:2019-02-15T17:12:02.891
+2019-02-15 17:12:09.046  INFO 14672 --- [main] c.s.c.SalaryCalculatorApplication        : Starting SalaryCalculatorApplication on WIN-2QVTEVGADPV with PID 14672 (D:\idea-workspace\SalaryCalculator\target\classes started by Administrator in D:\idea-workspace\SalaryCalculator)
+2019-02-15 17:12:09.049  INFO 14672 --- [main] c.s.c.SalaryCalculatorApplication        : The following profiles are active: dev
+2019-02-15 17:12:10.638  INFO 14672 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-02-15 17:12:10.668  INFO 14672 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-02-15 17:12:10.668  INFO 14672 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.14]
+2019-02-15 17:12:10.676  INFO 14672 --- [main] o.a.catalina.core.AprLifecycleListener   : An older version [1.2.16] of the APR based Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [1.2.19]
+2019-02-15 17:12:10.676  INFO 14672 --- [main] o.a.catalina.core.AprLifecycleListener   : Loaded APR based Apache Tomcat Native library [1.2.16] using APR version [1.6.3].
+2019-02-15 17:12:10.676  INFO 14672 --- [main] o.a.catalina.core.AprLifecycleListener   : APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+2019-02-15 17:12:10.676  INFO 14672 --- [main] o.a.catalina.core.AprLifecycleListener   : APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+2019-02-15 17:12:11.702  INFO 14672 --- [main] o.a.catalina.core.AprLifecycleListener   : OpenSSL successfully initialized [OpenSSL 1.0.2m  2 Nov 2017]
+2019-02-15 17:12:11.816  INFO 14672 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-02-15 17:12:11.816  INFO 14672 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2705 ms
+2019-02-15 17:12:13.141  INFO 14672 --- [main] org.quartz.impl.StdSchedulerFactory      : Using default implementation for ThreadExecutor
+2019-02-15 17:12:13.155  INFO 14672 --- [main] org.quartz.core.SchedulerSignalerImpl    : Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2019-02-15 17:12:13.156  INFO 14672 --- [main] org.quartz.core.QuartzScheduler          : Quartz Scheduler v.2.3.0 created.
+2019-02-15 17:12:13.157  INFO 14672 --- [main] org.quartz.simpl.RAMJobStore             : RAMJobStore initialized.
+2019-02-15 17:12:13.158  INFO 14672 --- [main] org.quartz.core.QuartzScheduler          : Scheduler meta-data: Quartz Scheduler (v2.3.0) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2019-02-15 17:12:13.158  INFO 14672 --- [main] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2019-02-15 17:12:13.158  INFO 14672 --- [main] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler version: 2.3.0
+2019-02-15 17:12:13.158  INFO 14672 --- [main] org.quartz.core.QuartzScheduler          : JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@2921199d
+2019-02-15 17:12:13.211  INFO 14672 --- [main] o.s.s.quartz.SchedulerFactoryBean        : Starting Quartz Scheduler now
+2019-02-15 17:12:13.211  INFO 14672 --- [main] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2019-02-15 17:12:13.255  INFO 14672 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-02-15 17:12:13.260  INFO 14672 --- [main] c.s.c.SalaryCalculatorApplication        : Started SalaryCalculatorApplication in 5.046 seconds (JVM running for 5.937)
+2019-02-15 17:12:18.799  INFO 14672 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 查询耗时 : 3637
+2019-02-15 17:15:09.880  INFO 7788 --- [main] c.s.c.SalaryCalculatorApplication        : Starting SalaryCalculatorApplication on WIN-2QVTEVGADPV with PID 7788 (D:\idea-workspace\SalaryCalculator\target\classes started by Administrator in D:\idea-workspace\SalaryCalculator)
+2019-02-15 17:15:09.885  INFO 7788 --- [main] c.s.c.SalaryCalculatorApplication        : The following profiles are active: dev
+2019-02-15 17:15:11.660  INFO 7788 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-02-15 17:15:11.688  INFO 7788 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-02-15 17:15:11.688  INFO 7788 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.14]
+2019-02-15 17:15:11.697  INFO 7788 --- [main] o.a.catalina.core.AprLifecycleListener   : An older version [1.2.16] of the APR based Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [1.2.19]
+2019-02-15 17:15:11.697  INFO 7788 --- [main] o.a.catalina.core.AprLifecycleListener   : Loaded APR based Apache Tomcat Native library [1.2.16] using APR version [1.6.3].
+2019-02-15 17:15:11.697  INFO 7788 --- [main] o.a.catalina.core.AprLifecycleListener   : APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+2019-02-15 17:15:11.698  INFO 7788 --- [main] o.a.catalina.core.AprLifecycleListener   : APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+2019-02-15 17:15:12.717  INFO 7788 --- [main] o.a.catalina.core.AprLifecycleListener   : OpenSSL successfully initialized [OpenSSL 1.0.2m  2 Nov 2017]
+2019-02-15 17:15:12.827  INFO 7788 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-02-15 17:15:12.828  INFO 7788 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2786 ms
+2019-02-15 17:15:14.084  INFO 7788 --- [main] org.quartz.impl.StdSchedulerFactory      : Using default implementation for ThreadExecutor
+2019-02-15 17:15:14.100  INFO 7788 --- [main] org.quartz.core.SchedulerSignalerImpl    : Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2019-02-15 17:15:14.101  INFO 7788 --- [main] org.quartz.core.QuartzScheduler          : Quartz Scheduler v.2.3.0 created.
+2019-02-15 17:15:14.102  INFO 7788 --- [main] org.quartz.simpl.RAMJobStore             : RAMJobStore initialized.
+2019-02-15 17:15:14.103  INFO 7788 --- [main] org.quartz.core.QuartzScheduler          : Scheduler meta-data: Quartz Scheduler (v2.3.0) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2019-02-15 17:15:14.103  INFO 7788 --- [main] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2019-02-15 17:15:14.103  INFO 7788 --- [main] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler version: 2.3.0
+2019-02-15 17:15:14.103  INFO 7788 --- [main] org.quartz.core.QuartzScheduler          : JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@43f03c23
+2019-02-15 17:15:14.156  INFO 7788 --- [main] o.s.s.quartz.SchedulerFactoryBean        : Starting Quartz Scheduler now
+2019-02-15 17:15:14.156  INFO 7788 --- [main] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2019-02-15 17:15:14.200  INFO 7788 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-02-15 17:15:14.205  INFO 7788 --- [main] c.s.c.SalaryCalculatorApplication        : Started SalaryCalculatorApplication in 5.166 seconds (JVM running for 5.931)
+2019-02-15 17:15:18.731  INFO 7788 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 查询耗时 : 3511
+2019-02-15 17:51:19.293  INFO 8388 --- [main] c.s.c.SalaryCalculatorApplication        : Starting SalaryCalculatorApplication on WIN-2QVTEVGADPV with PID 8388 (D:\idea-workspace\SalaryCalculator\target\classes started by Administrator in D:\idea-workspace\SalaryCalculator)
+2019-02-15 17:51:19.297  INFO 8388 --- [main] c.s.c.SalaryCalculatorApplication        : The following profiles are active: dev
+2019-02-15 17:51:20.974  INFO 8388 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-02-15 17:51:21.002  INFO 8388 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-02-15 17:51:21.003  INFO 8388 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.14]
+2019-02-15 17:51:21.009  INFO 8388 --- [main] o.a.catalina.core.AprLifecycleListener   : An older version [1.2.16] of the APR based Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [1.2.19]
+2019-02-15 17:51:21.010  INFO 8388 --- [main] o.a.catalina.core.AprLifecycleListener   : Loaded APR based Apache Tomcat Native library [1.2.16] using APR version [1.6.3].
+2019-02-15 17:51:21.010  INFO 8388 --- [main] o.a.catalina.core.AprLifecycleListener   : APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+2019-02-15 17:51:21.010  INFO 8388 --- [main] o.a.catalina.core.AprLifecycleListener   : APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+2019-02-15 17:51:22.027  INFO 8388 --- [main] o.a.catalina.core.AprLifecycleListener   : OpenSSL successfully initialized [OpenSSL 1.0.2m  2 Nov 2017]
+2019-02-15 17:51:22.128  INFO 8388 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-02-15 17:51:22.129  INFO 8388 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2735 ms
+2019-02-15 17:51:23.308  INFO 8388 --- [main] org.quartz.impl.StdSchedulerFactory      : Using default implementation for ThreadExecutor
+2019-02-15 17:51:23.322  INFO 8388 --- [main] org.quartz.core.SchedulerSignalerImpl    : Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2019-02-15 17:51:23.323  INFO 8388 --- [main] org.quartz.core.QuartzScheduler          : Quartz Scheduler v.2.3.0 created.
+2019-02-15 17:51:23.323  INFO 8388 --- [main] org.quartz.simpl.RAMJobStore             : RAMJobStore initialized.
+2019-02-15 17:51:23.324  INFO 8388 --- [main] org.quartz.core.QuartzScheduler          : Scheduler meta-data: Quartz Scheduler (v2.3.0) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2019-02-15 17:51:23.324  INFO 8388 --- [main] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2019-02-15 17:51:23.324  INFO 8388 --- [main] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler version: 2.3.0
+2019-02-15 17:51:23.325  INFO 8388 --- [main] org.quartz.core.QuartzScheduler          : JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@c3177d5
+2019-02-15 17:51:23.370  INFO 8388 --- [main] o.s.s.quartz.SchedulerFactoryBean        : Starting Quartz Scheduler now
+2019-02-15 17:51:23.370  INFO 8388 --- [main] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2019-02-15 17:51:23.409  INFO 8388 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-02-15 17:51:23.413  INFO 8388 --- [main] c.s.c.SalaryCalculatorApplication        : Started SalaryCalculatorApplication in 4.983 seconds (JVM running for 5.519)
+2019-02-15 17:51:28.930  INFO 8388 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 查询耗时 : 3762
+2019-02-15 17:52:00.751  INFO 8388 --- [pool-2-thread-1] c.sss.calculator.schedule.TaskScheduler  : 封装计算插入耗时 : 31685
+2019-02-15 17:52:00.752  INFO 8388 --- [pool-2-thread-1] c.sss.calculator.schedule.TaskScheduler  : 本月截止到:2019-02-14,全部数据计算更新完成，薪资计算时间为:2019-02-15T17:52:00.752
+2019-02-15 17:52:08.486  INFO 8388 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 查询耗时 : 3472
+2019-02-15 17:52:42.032  INFO 8388 --- [pool-2-thread-1] c.sss.calculator.schedule.TaskScheduler  : 封装计算插入耗时 : 33412
+2019-02-15 17:52:42.032  INFO 8388 --- [pool-2-thread-1] c.sss.calculator.schedule.TaskScheduler  : 本月截止到:2019-02-14,全部数据计算更新完成，薪资计算时间为:2019-02-15T17:52:42.032
+2019-02-15 17:52:48.424  INFO 8388 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 查询耗时 : 3413
+2019-02-15 17:53:20.172  INFO 8388 --- [pool-2-thread-1] c.sss.calculator.schedule.TaskScheduler  : 封装计算插入耗时 : 31623
+2019-02-15 17:53:20.172  INFO 8388 --- [pool-2-thread-1] c.sss.calculator.schedule.TaskScheduler  : 本月截止到:2019-02-14,全部数据计算更新完成，薪资计算时间为:2019-02-15T17:53:20.172
+2019-02-15 17:53:28.364  INFO 8388 --- [pool-2-thread-2] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 查询耗时 : 3354
+2019-02-15 18:53:26.259  INFO 12576 --- [main] c.s.c.SalaryCalculatorApplication        : Starting SalaryCalculatorApplication on WIN-2QVTEVGADPV with PID 12576 (D:\idea-workspace\SalaryCalculator\target\classes started by Administrator in D:\idea-workspace\SalaryCalculator)
+2019-02-15 18:53:26.263  INFO 12576 --- [main] c.s.c.SalaryCalculatorApplication        : The following profiles are active: dev
+2019-02-15 18:53:27.944  INFO 12576 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-02-15 18:53:27.974  INFO 12576 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-02-15 18:53:27.974  INFO 12576 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.14]
+2019-02-15 18:53:27.981  INFO 12576 --- [main] o.a.catalina.core.AprLifecycleListener   : An older version [1.2.16] of the APR based Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [1.2.19]
+2019-02-15 18:53:27.982  INFO 12576 --- [main] o.a.catalina.core.AprLifecycleListener   : Loaded APR based Apache Tomcat Native library [1.2.16] using APR version [1.6.3].
+2019-02-15 18:53:27.982  INFO 12576 --- [main] o.a.catalina.core.AprLifecycleListener   : APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+2019-02-15 18:53:27.982  INFO 12576 --- [main] o.a.catalina.core.AprLifecycleListener   : APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+2019-02-15 18:53:29.012  INFO 12576 --- [main] o.a.catalina.core.AprLifecycleListener   : OpenSSL successfully initialized [OpenSSL 1.0.2m  2 Nov 2017]
+2019-02-15 18:53:29.128  INFO 12576 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-02-15 18:53:29.129  INFO 12576 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2783 ms
+2019-02-15 18:53:35.468  INFO 12576 --- [main] org.quartz.impl.StdSchedulerFactory      : Using default implementation for ThreadExecutor
+2019-02-15 18:53:35.484  INFO 12576 --- [main] org.quartz.core.SchedulerSignalerImpl    : Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2019-02-15 18:53:35.484  INFO 12576 --- [main] org.quartz.core.QuartzScheduler          : Quartz Scheduler v.2.3.0 created.
+2019-02-15 18:53:35.485  INFO 12576 --- [main] org.quartz.simpl.RAMJobStore             : RAMJobStore initialized.
+2019-02-15 18:53:35.486  INFO 12576 --- [main] org.quartz.core.QuartzScheduler          : Scheduler meta-data: Quartz Scheduler (v2.3.0) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2019-02-15 18:53:35.486  INFO 12576 --- [main] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2019-02-15 18:53:35.486  INFO 12576 --- [main] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler version: 2.3.0
+2019-02-15 18:53:35.486  INFO 12576 --- [main] org.quartz.core.QuartzScheduler          : JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@2574a9e3
+2019-02-15 18:53:35.543  INFO 12576 --- [main] o.s.s.quartz.SchedulerFactoryBean        : Starting Quartz Scheduler now
+2019-02-15 18:53:35.543  INFO 12576 --- [main] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2019-02-15 18:53:35.593  INFO 12576 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-02-15 18:53:35.598  INFO 12576 --- [main] c.s.c.SalaryCalculatorApplication        : Started SalaryCalculatorApplication in 10.032 seconds (JVM running for 10.754)
+2019-02-15 18:54:32.037  INFO 12576 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 查询耗时 : 3443
+2019-02-15 18:54:43.753  INFO 12576 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 查询耗时 : 3101
+2019-02-15 18:54:46.979 ERROR 12576 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : java.lang.IndexOutOfBoundsException: Index: 0, Size: 0
+2019-02-15 18:54:47.012  INFO 12576 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 查询耗时 : 3245
+2019-02-15 18:54:50.488  INFO 12576 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 查询耗时 : 3469
+2019-02-15 18:54:54.021  INFO 12576 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 查询耗时 : 3518
+2019-02-15 18:54:57.580  INFO 12576 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 查询耗时 : 3544
+2019-02-15 18:55:01.364  INFO 12576 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 查询耗时 : 3775
+2019-02-15 18:55:05.057  INFO 12576 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 查询耗时 : 3674
+2019-02-15 18:55:08.748  INFO 12576 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 查询耗时 : 3683
+2019-02-15 18:55:12.434  INFO 12576 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 查询耗时 : 3679
+2019-02-15 18:55:16.226  INFO 12576 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 查询耗时 : 3781
+2019-02-15 18:55:20.060  INFO 12576 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 查询耗时 : 3827
+2019-02-15 18:56:37.399  INFO 12576 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 查询耗时 : 3610
+2019-02-15 18:56:40.307  INFO 12576 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 查询耗时 : 2892
+2019-02-15 18:57:07.707  INFO 12576 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 查询耗时 : 2842
+2019-02-15 18:58:15.078  INFO 12576 --- [pool-2-thread-1] c.sss.calculator.schedule.TaskScheduler  : 封装计算插入耗时 : 67279
+2019-02-15 18:59:22.768  INFO 12576 --- [pool-2-thread-1] c.sss.calculator.schedule.TaskScheduler  : 本月截止到:2019-02-14,全部数据计算更新完成，薪资计算时间为:2019-02-15T18:59:22.768
+2019-02-15 18:59:38.052  INFO 11076 --- [main] c.s.c.SalaryCalculatorApplication        : Starting SalaryCalculatorApplication on WIN-2QVTEVGADPV with PID 11076 (D:\idea-workspace\SalaryCalculator\target\classes started by Administrator in D:\idea-workspace\SalaryCalculator)
+2019-02-15 18:59:38.056  INFO 11076 --- [main] c.s.c.SalaryCalculatorApplication        : The following profiles are active: dev
+2019-02-15 18:59:39.894  INFO 11076 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-02-15 18:59:39.923  INFO 11076 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-02-15 18:59:39.923  INFO 11076 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.14]
+2019-02-15 18:59:39.931  INFO 11076 --- [main] o.a.catalina.core.AprLifecycleListener   : An older version [1.2.16] of the APR based Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [1.2.19]
+2019-02-15 18:59:39.931  INFO 11076 --- [main] o.a.catalina.core.AprLifecycleListener   : Loaded APR based Apache Tomcat Native library [1.2.16] using APR version [1.6.3].
+2019-02-15 18:59:39.931  INFO 11076 --- [main] o.a.catalina.core.AprLifecycleListener   : APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+2019-02-15 18:59:39.931  INFO 11076 --- [main] o.a.catalina.core.AprLifecycleListener   : APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+2019-02-15 18:59:40.949  INFO 11076 --- [main] o.a.catalina.core.AprLifecycleListener   : OpenSSL successfully initialized [OpenSSL 1.0.2m  2 Nov 2017]
+2019-02-15 18:59:41.065  INFO 11076 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-02-15 18:59:41.066  INFO 11076 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2891 ms
+2019-02-15 18:59:42.277  INFO 11076 --- [main] org.quartz.impl.StdSchedulerFactory      : Using default implementation for ThreadExecutor
+2019-02-15 18:59:42.294  INFO 11076 --- [main] org.quartz.core.SchedulerSignalerImpl    : Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2019-02-15 18:59:42.295  INFO 11076 --- [main] org.quartz.core.QuartzScheduler          : Quartz Scheduler v.2.3.0 created.
+2019-02-15 18:59:42.295  INFO 11076 --- [main] org.quartz.simpl.RAMJobStore             : RAMJobStore initialized.
+2019-02-15 18:59:42.297  INFO 11076 --- [main] org.quartz.core.QuartzScheduler          : Scheduler meta-data: Quartz Scheduler (v2.3.0) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2019-02-15 18:59:42.297  INFO 11076 --- [main] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2019-02-15 18:59:42.297  INFO 11076 --- [main] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler version: 2.3.0
+2019-02-15 18:59:42.297  INFO 11076 --- [main] org.quartz.core.QuartzScheduler          : JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@7b2bf745
+2019-02-15 18:59:42.358  INFO 11076 --- [main] o.s.s.quartz.SchedulerFactoryBean        : Starting Quartz Scheduler now
+2019-02-15 18:59:42.358  INFO 11076 --- [main] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2019-02-15 18:59:42.406  INFO 11076 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-02-15 18:59:42.411  INFO 11076 --- [main] c.s.c.SalaryCalculatorApplication        : Started SalaryCalculatorApplication in 5.219 seconds (JVM running for 5.992)
+2019-02-15 18:59:56.403  INFO 11076 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 查询耗时 : 3344
+2019-02-15 19:00:01.613  INFO 11076 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 查询耗时 : 3397
+2019-02-15 19:00:06.581  INFO 11076 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 查询耗时 : 3202
+2019-02-15 19:00:11.956  INFO 11076 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 查询耗时 : 3477
+2019-02-15 19:00:17.242  INFO 11076 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 查询耗时 : 3503
+2019-02-15 19:00:22.717  INFO 11076 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 查询耗时 : 3662
+2019-02-15 19:00:28.876  INFO 11076 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 查询耗时 : 3657
+2019-02-15 19:00:32.460  INFO 11076 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 查询耗时 : 3572
+2019-02-15 19:00:36.168  INFO 11076 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 查询耗时 : 3692
+2019-02-15 19:00:39.977  INFO 11076 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 查询耗时 : 3794
+2019-02-15 19:00:43.687  INFO 11076 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 查询耗时 : 3698
+2019-02-15 19:00:47.488  INFO 11076 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 查询耗时 : 3790
+2019-02-15 19:02:01.540  INFO 7488 --- [main] c.s.c.SalaryCalculatorApplication        : Starting SalaryCalculatorApplication on WIN-2QVTEVGADPV with PID 7488 (D:\idea-workspace\SalaryCalculator\target\classes started by Administrator in D:\idea-workspace\SalaryCalculator)
+2019-02-15 19:02:01.543  INFO 7488 --- [main] c.s.c.SalaryCalculatorApplication        : The following profiles are active: dev
+2019-02-15 19:02:03.065  INFO 7488 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-02-15 19:02:03.095  INFO 7488 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-02-15 19:02:03.095  INFO 7488 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.14]
+2019-02-15 19:02:03.103  INFO 7488 --- [main] o.a.catalina.core.AprLifecycleListener   : An older version [1.2.16] of the APR based Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [1.2.19]
+2019-02-15 19:02:03.103  INFO 7488 --- [main] o.a.catalina.core.AprLifecycleListener   : Loaded APR based Apache Tomcat Native library [1.2.16] using APR version [1.6.3].
+2019-02-15 19:02:03.104  INFO 7488 --- [main] o.a.catalina.core.AprLifecycleListener   : APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+2019-02-15 19:02:03.104  INFO 7488 --- [main] o.a.catalina.core.AprLifecycleListener   : APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+2019-02-15 19:02:04.126  INFO 7488 --- [main] o.a.catalina.core.AprLifecycleListener   : OpenSSL successfully initialized [OpenSSL 1.0.2m  2 Nov 2017]
+2019-02-15 19:02:04.236  INFO 7488 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-02-15 19:02:04.237  INFO 7488 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2617 ms
+2019-02-15 19:02:05.516  INFO 7488 --- [main] org.quartz.impl.StdSchedulerFactory      : Using default implementation for ThreadExecutor
+2019-02-15 19:02:05.531  INFO 7488 --- [main] org.quartz.core.SchedulerSignalerImpl    : Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2019-02-15 19:02:05.531  INFO 7488 --- [main] org.quartz.core.QuartzScheduler          : Quartz Scheduler v.2.3.0 created.
+2019-02-15 19:02:05.532  INFO 7488 --- [main] org.quartz.simpl.RAMJobStore             : RAMJobStore initialized.
+2019-02-15 19:02:05.533  INFO 7488 --- [main] org.quartz.core.QuartzScheduler          : Scheduler meta-data: Quartz Scheduler (v2.3.0) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2019-02-15 19:02:05.533  INFO 7488 --- [main] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2019-02-15 19:02:05.533  INFO 7488 --- [main] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler version: 2.3.0
+2019-02-15 19:02:05.533  INFO 7488 --- [main] org.quartz.core.QuartzScheduler          : JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@67f63d26
+2019-02-15 19:02:05.588  INFO 7488 --- [main] o.s.s.quartz.SchedulerFactoryBean        : Starting Quartz Scheduler now
+2019-02-15 19:02:05.588  INFO 7488 --- [main] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2019-02-15 19:02:05.635  INFO 7488 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-02-15 19:02:05.640  INFO 7488 --- [main] c.s.c.SalaryCalculatorApplication        : Started SalaryCalculatorApplication in 5.019 seconds (JVM running for 5.871)
+2019-02-15 19:02:21.964  INFO 7488 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 2018年01月，查询耗时 : 3363
+2019-02-15 19:02:25.064  INFO 7488 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 2018年02月，查询耗时 : 3089
+2019-02-15 19:02:28.515  INFO 7488 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 2018年03月，查询耗时 : 3441
+2019-02-15 19:02:32.075  INFO 7488 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 2018年04月，查询耗时 : 3545
+2019-02-15 19:02:35.668  INFO 7488 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 2018年05月，查询耗时 : 3580
+2019-02-15 19:02:39.251  INFO 7488 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 2018年06月，查询耗时 : 3565
+2019-02-15 19:02:43.062  INFO 7488 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 2018年07月，查询耗时 : 3796
+2019-02-15 19:02:46.846  INFO 7488 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 2018年08月，查询耗时 : 3771
+2019-02-15 19:02:50.754  INFO 7488 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 2018年09月，查询耗时 : 3892
+2019-02-15 19:02:54.385  INFO 7488 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 2018年10月，查询耗时 : 3618
+2019-02-15 19:02:58.205  INFO 7488 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 2018年11月，查询耗时 : 3808
+2019-02-15 19:03:01.956  INFO 7488 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 2018年12月，查询耗时 : 3741
+2019-02-15 19:03:08.523  INFO 7488 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 2019年01月，查询耗时 : 3701
+2019-02-15 19:03:11.275  INFO 7488 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 2019年02月，查询耗时 : 2744
+2019-02-15 19:03:20.434  INFO 7488 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 查询耗时 : 2773
+2019-02-15 19:03:52.589  INFO 7488 --- [pool-2-thread-1] c.sss.calculator.schedule.TaskScheduler  : 封装计算插入耗时 : 32042
+2019-02-15 19:03:52.591  INFO 7488 --- [pool-2-thread-1] c.sss.calculator.schedule.TaskScheduler  : 本月截止到:2019-02-14,全部数据计算更新完成，薪资计算时间为:2019-02-15T19:03:52.591
+2019-02-15 19:04:05.914  INFO 7488 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 2018年01月，查询耗时 : 3030
+2019-02-15 19:04:08.915  INFO 7488 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 2018年02月，查询耗时 : 2994
+2019-02-15 19:04:12.199  INFO 7488 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 2018年03月，查询耗时 : 3270
+2019-02-15 19:04:15.692  INFO 7488 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 2018年04月，查询耗时 : 3481
+2019-02-15 19:04:19.284  INFO 7488 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 2018年05月，查询耗时 : 3579
+2019-02-15 19:04:22.952  INFO 7488 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 2018年06月，查询耗时 : 3656
+2019-02-15 19:04:26.660  INFO 7488 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 2018年07月，查询耗时 : 3702
+2019-02-15 19:04:30.311  INFO 7488 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 2018年08月，查询耗时 : 3640
+2019-02-15 19:04:33.994  INFO 7488 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 2018年09月，查询耗时 : 3676
+2019-02-15 19:04:37.712  INFO 7488 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 2018年10月，查询耗时 : 3703
+2019-02-15 19:04:41.430  INFO 7488 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 2018年11月，查询耗时 : 3706
+2019-02-15 19:04:45.256  INFO 7488 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 2018年12月，查询耗时 : 3816
+2019-02-15 19:04:52.631  INFO 7488 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 2019年01月，查询耗时 : 3517
+2019-02-15 19:04:55.332  INFO 7488 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 2019年02月，查询耗时 : 2694
+2019-02-15 19:05:05.474  INFO 7488 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 查询耗时 : 2892
+2019-02-15 19:05:38.160  INFO 7488 --- [pool-2-thread-1] c.sss.calculator.schedule.TaskScheduler  : 封装计算插入耗时 : 32600
+2019-02-15 19:05:38.161  INFO 7488 --- [pool-2-thread-1] c.sss.calculator.schedule.TaskScheduler  : 本月截止到:2019-02-14,全部数据计算更新完成，薪资计算时间为:2019-02-15T19:05:38.161
+2019-02-15 19:05:49.457  INFO 4384 --- [main] c.s.c.SalaryCalculatorApplication        : Starting SalaryCalculatorApplication on WIN-2QVTEVGADPV with PID 4384 (D:\idea-workspace\SalaryCalculator\target\classes started by Administrator in D:\idea-workspace\SalaryCalculator)
+2019-02-15 19:05:49.461  INFO 4384 --- [main] c.s.c.SalaryCalculatorApplication        : The following profiles are active: dev
+2019-02-15 19:05:51.104  INFO 4384 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-02-15 19:05:51.133  INFO 4384 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-02-15 19:05:51.134  INFO 4384 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.14]
+2019-02-15 19:05:51.141  INFO 4384 --- [main] o.a.catalina.core.AprLifecycleListener   : An older version [1.2.16] of the APR based Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [1.2.19]
+2019-02-15 19:05:51.141  INFO 4384 --- [main] o.a.catalina.core.AprLifecycleListener   : Loaded APR based Apache Tomcat Native library [1.2.16] using APR version [1.6.3].
+2019-02-15 19:05:51.141  INFO 4384 --- [main] o.a.catalina.core.AprLifecycleListener   : APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+2019-02-15 19:05:51.142  INFO 4384 --- [main] o.a.catalina.core.AprLifecycleListener   : APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+2019-02-15 19:05:52.170  INFO 4384 --- [main] o.a.catalina.core.AprLifecycleListener   : OpenSSL successfully initialized [OpenSSL 1.0.2m  2 Nov 2017]
+2019-02-15 19:05:52.286  INFO 4384 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-02-15 19:05:52.287  INFO 4384 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2756 ms
+2019-02-15 19:05:53.545  INFO 4384 --- [main] org.quartz.impl.StdSchedulerFactory      : Using default implementation for ThreadExecutor
+2019-02-15 19:05:53.562  INFO 4384 --- [main] org.quartz.core.SchedulerSignalerImpl    : Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2019-02-15 19:05:53.562  INFO 4384 --- [main] org.quartz.core.QuartzScheduler          : Quartz Scheduler v.2.3.0 created.
+2019-02-15 19:05:53.563  INFO 4384 --- [main] org.quartz.simpl.RAMJobStore             : RAMJobStore initialized.
+2019-02-15 19:05:53.565  INFO 4384 --- [main] org.quartz.core.QuartzScheduler          : Scheduler meta-data: Quartz Scheduler (v2.3.0) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2019-02-15 19:05:53.565  INFO 4384 --- [main] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2019-02-15 19:05:53.565  INFO 4384 --- [main] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler version: 2.3.0
+2019-02-15 19:05:53.565  INFO 4384 --- [main] org.quartz.core.QuartzScheduler          : JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@4041739c
+2019-02-15 19:05:53.622  INFO 4384 --- [main] o.s.s.quartz.SchedulerFactoryBean        : Starting Quartz Scheduler now
+2019-02-15 19:05:53.622  INFO 4384 --- [main] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2019-02-15 19:05:53.667  INFO 4384 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-02-15 19:05:53.673  INFO 4384 --- [main] c.s.c.SalaryCalculatorApplication        : Started SalaryCalculatorApplication in 5.014 seconds (JVM running for 5.786)
+2019-02-15 19:06:02.226  INFO 4384 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 2018年01月，查询耗时 : 4155
+2019-02-15 19:06:05.320  INFO 4384 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 2018年02月，查询耗时 : 3082
+2019-02-15 19:06:08.570  INFO 4384 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 2018年03月，查询耗时 : 3236
+2019-02-15 19:06:12.028  INFO 4384 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 2018年04月，查询耗时 : 3445
+2019-02-15 19:06:15.630  INFO 4384 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 2018年05月，查询耗时 : 3581
+2019-02-15 19:06:19.215  INFO 4384 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 2018年06月，查询耗时 : 3572
+2019-02-15 19:06:22.949  INFO 4384 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 2018年07月，查询耗时 : 3721
+2019-02-15 19:06:26.674  INFO 4384 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 2018年08月，查询耗时 : 3709
+2019-02-15 19:06:30.349  INFO 4384 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 2018年09月，查询耗时 : 3660
+2019-02-15 19:06:34.042  INFO 4384 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 2018年10月，查询耗时 : 3684
+2019-02-15 19:06:37.792  INFO 4384 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 2018年11月，查询耗时 : 3733
+2019-02-15 19:06:41.543  INFO 4384 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 2018年12月，查询耗时 : 3722
+2019-02-15 19:06:48.726  INFO 4384 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 2019年01月，查询耗时 : 3601
+2019-02-15 19:06:51.543  INFO 4384 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 2019年02月，查询耗时 : 2805
+2019-02-15 19:06:59.869  INFO 4384 --- [pool-2-thread-1] c.s.c.s.serviceimpl.SaleInfoServiceImpl  : 2019年02月，查询耗时 : 3619

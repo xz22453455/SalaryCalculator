@@ -131,7 +131,7 @@ public class SaleInfoServiceImpl implements SaleInfoService {
             saleInfos.clear();
         }
         long endTime = System.currentTimeMillis();
-        logger.info("查询耗时 : " + (endTime - startTime));
+        logger.info(year + "年" + month + "月，查询耗时 : " + (endTime - startTime));
     }
 
     @Override
@@ -148,6 +148,85 @@ public class SaleInfoServiceImpl implements SaleInfoService {
             logger.debug("------------------------工号: " + saleInfo.getEmployeeNo() + "  截止到" + yesterday + " 数据更新成功------------------------");
         }
         logger.debug("------------------------" + yesterday + "全部数据更新完成------------------------");
+    }
+
+    @Override
+    public void historySaleInfo() {
+        Integer months = 12;
+        Integer year = LocalDate.now().getYear();
+        Integer mathMonth = LocalDate.now().getMonthValue();
+        for (Integer i = 2018; i <= year; i++) {
+            for (int j = 1; j <= (year.equals(i) ? mathMonth : months); j++) {
+                String month;
+                int monthss = 10;
+                if (j < monthss) {
+                    month = "0" + j;
+                } else {
+                    month = String.valueOf(j);
+                }
+                hisSaleInfo(i, month);
+            }
+        }
+    }
+
+    public void hisSaleInfo(Integer year, String month) {
+        List<Employee> employees = getAllEmployee();
+        PostRankExample postRankExample = new PostRankExample();
+        List<PostRank> postrank = postRankService.selectByPostRankExample(postRankExample);
+        ExecutorService service = Executors.newFixedThreadPool(10);
+        long startTime = System.currentTimeMillis();
+        //等级个数
+        int i;
+        for (i = 3; i > 0; i--) {
+            int count = 0;
+            CompletionService<String> completionService = new ExecutorCompletionService(service);
+            for (int j = 0; j < employees.size() - 1; j++) {
+                Employee employee = employees.get(j);
+                if (i == 3) {
+                    count++;
+                    logger.debug("------------********创建普通员工Task*********--------------");
+                    GetContentTask getContentTask = new SaleInfoServiceImpl.GetContentTask(employee, i, year, month);
+
+                    logger.debug("------------********提交Callable类型的普通task任务*********--------------");
+                    completionService.submit(getContentTask);
+                }
+                if (i == 2) {
+                    PostRank postRank = postrank.get(i - 1);
+                    logger.debug("------------********进行" + postRank.getPost() + "计算*********--------------");
+                    if (employee.getPost().equals(postRank.getPost())) {
+                        count++;
+                        logger.debug("------------********创建中级员工Task*********--------------");
+                        GetContentTask getContentTask = new SaleInfoServiceImpl.GetContentTask(employee, i, year, month);
+                        logger.debug("------------********提交Callable类型的中级task任务*********--------------");
+                        completionService.submit(getContentTask);
+                    }
+                }
+                if (i == 1) {
+                    PostRank postRank = postrank.get(i - 1);
+                    logger.debug("------------********进行" + postRank.getPost() + "计算*********--------------");
+                    if (employee.getPost().equals(postRank.getPost())) {
+                        count++;
+                        logger.debug("------------********创建高级员工Task*********--------------");
+                        GetContentTask getContentTask = new SaleInfoServiceImpl.GetContentTask(employee, i, year, month);
+                        logger.debug("------------********提交Callable类型的高级task任务*********--------------");
+                        completionService.submit(getContentTask);
+                    }
+                }
+            }
+            try {
+                for (int k = 0; k < count; k++) {
+                    logger.debug("------------********获取并移除已完成状态的task，如果目前不存在这样的task，则等待*********--------------");
+                    Future<String> result = completionService.take();
+                    logger.debug(result.get());
+                }
+            } catch (Exception ex) {
+                logger.error(ex.getMessage());
+            }
+            timeUpdateOrInsert(saleInfos);
+            saleInfos.clear();
+        }
+        long endTime = System.currentTimeMillis();
+        logger.info(year + "年" + month + "月，查询耗时 : " + (endTime - startTime));
     }
 
     //Callable接口代表一段可以调用并返回结果的代码;Future接口表示异步任务，
@@ -171,11 +250,11 @@ public class SaleInfoServiceImpl implements SaleInfoService {
                 logger.debug("------------********计算最小职位*********--------------");
                 calcuBase(employee);
             } else if (num == 2) {
-                ArrayList<HashMap<String, Object>> findall = saleInfoDao.findall(year, month, employee.getEmployeeNo());
+                ArrayList<HashMap<String, Object>> findall = saleInfoDao.findMid(year, month, employee.getEmployeeNo());
                 logger.debug("------------********计算中间职位*********--------------");
                 calcuMid(employee, findall);
             } else if (num == 1) {
-                ArrayList<HashMap<String, Object>> findall = saleInfoDao.findall(year, month, employee.getEmployeeNo());
+                ArrayList<HashMap<String, Object>> findall = saleInfoDao.findMid(year, month, employee.getEmployeeNo());
                 logger.debug("------------********计算最大职位*********--------------");
                 calcuTop(employee, findall);
             }
@@ -193,10 +272,10 @@ public class SaleInfoServiceImpl implements SaleInfoService {
             saleInfo.setPostLevel(String.valueOf(employee.getPostLevel()));
             String employeeNo = employee.getEmployeeNo();
             //累计订单量
-            String totalOrderSize = saleInfoDao.findTotalOrderSize(year, employeeNo);
+            String totalOrderSize = saleInfoDao.findTotalOrderSize(year, Integer.valueOf(month), employeeNo);
             saleInfo.setTotalOrderSize(new BigDecimal(totalOrderSize == null ? "0" : totalOrderSize));
             //累计订单额
-            String totalOrderMoney = saleInfoDao.findTotalOrderMoney(year, employeeNo);
+            String totalOrderMoney = saleInfoDao.findTotalOrderMoney(year, Integer.valueOf(month), employeeNo);
             saleInfo.setTotalOrderMoney(new BigDecimal(totalOrderMoney == null ? "0" : totalOrderMoney));
             //当月订单量
             String currentMonthSize = saleInfoDao.findCurrentMonthSize(year, month, employeeNo);
@@ -205,13 +284,13 @@ public class SaleInfoServiceImpl implements SaleInfoService {
             String currentMonthMoney = saleInfoDao.findCurrentMonthMoney(year, month, employeeNo);
             saleInfo.setCurrentMonthMoney(new BigDecimal(currentMonthMoney == null ? "0" : currentMonthMoney));
             //累计出库量
-            String totalOutputSize = saleInfoDao.findTotalOutputSize(year, employeeNo);
+            String totalOutputSize = saleInfoDao.findTotalOutputSize(year, Integer.valueOf(month), employeeNo);
             saleInfo.setTotalOutputSize(new BigDecimal(totalOutputSize == null ? "0" : totalOutputSize));
             //吨钢加价
-            String totalPrice = saleInfoDao.findTotalPrice(year, employeeNo);
+            String totalPrice = saleInfoDao.findTotalPrice(year, Integer.valueOf(month), employeeNo);
             saleInfo.setPricePerTon(new BigDecimal(totalPrice == null ? "0" : totalPrice));
             //累计出库额
-            String totalOutputMoney = saleInfoDao.findTotalOutputMoney(year, employeeNo);
+            String totalOutputMoney = saleInfoDao.findTotalOutputMoney(year, Integer.valueOf(month), employeeNo);
             saleInfo.setTotalOutputMoney(new BigDecimal(totalOutputMoney == null ? "0" : totalOutputMoney));
             //当月出库量
             String currentMonthOutputSize = saleInfoDao.findCurrentMonthOutputSize(year, month, employeeNo);
@@ -232,7 +311,7 @@ public class SaleInfoServiceImpl implements SaleInfoService {
             String monthTargetMoney = saleInfoDao.findMonthTargetMoney(year, month, employeeNo);
             saleInfo.setMonthTargetMoney(new BigDecimal(monthTargetMoney == null ? "0" : monthTargetMoney));
             //累计回款
-            String totalReturnMoney = saleInfoDao.findTotalReturnMoney(year, employeeNo);
+            String totalReturnMoney = saleInfoDao.findTotalReturnMoney(year, Integer.valueOf(month), employeeNo);
             saleInfo.setTotalReturnMoney(new BigDecimal(totalReturnMoney == null ? "0" : totalReturnMoney));
             saleInfos.add(saleInfo);
         }

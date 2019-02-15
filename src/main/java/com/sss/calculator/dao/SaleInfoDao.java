@@ -60,36 +60,37 @@ public interface SaleInfoDao {
             "GROUP BY\n" +
             "\tINFO.\"YEAR\",\n" +
             "\tINFO.\"MONTH\"")
-    ArrayList<HashMap<String,Object>> findall(@Param("year") Integer year, @Param("month") String month, @Param("id") String id);
-
+    ArrayList<HashMap<String,Object>> findMid(@Param("year") Integer year, @Param("month") String month, @Param("id") String id);
 
     //查询年订单销售量
     @Select("SELECT\n" +
-            "\t\"ROUND\"(\"SUM\" (UAC.\"sales\"), 2) 年订单销售量\n" +
+            "\t\"ROUND\" (\"SUM\"(UAC.\"sales\"), 2) 年累计销量\n" +
             "FROM\n" +
             "\tERP_SD_V_USERS_ACTUALSALES UAC\n" +
             "LEFT JOIN ERP_SD_V_USERS_TARGETSALES UTA ON UAC.\"id\" = UTA.\"ID\"\n" +
             "AND UAC.\"year\" = UTA.\"year\"\n" +
             "AND UAC.\"month\" = UTA.\"month\"\n" +
             "WHERE\n" +
-            "\tUAC.\"year\" =  #{year}\n" +
-            "AND UAC.\"id\" = #{id}\n")
-    String findTotalOrderSize(@Param("year") Integer year, @Param("id") String id);
+            "\tUAC.\"year\" = #{year}\n" +
+            "AND UAC.\"month\" BETWEEN 01\n" +
+            "AND #{month}\n" +
+            "AND UAC.\"id\" = #{id}")
+    String findTotalOrderSize(@Param("year") Integer year,@Param("month") Integer month, @Param("id") String id);
 
     //查询年订单销售额
     @Select("SELECT\n" +
-            "\n" +
-            "\t\"ROUND\"(\"SUM\" (UAC.\"salesvalue\"), 2) 年订单销售额\n" +
-            "\n" +
+            "\t\"ROUND\" (\"SUM\"(UAC.\"salesvalue\"), 2) 年订单销售额\n" +
             "FROM\n" +
             "\tERP_SD_V_USERS_ACTUALSALES UAC\n" +
             "LEFT JOIN ERP_SD_V_USERS_TARGETSALES_V UTA ON UAC.\"id\" = UTA.\"人员编号\"\n" +
             "AND UAC.\"year\" = UTA.\"年\"\n" +
             "AND UAC.\"month\" = UTA.\"月\"\n" +
-            "where \n" +
-            "UAC.\"year\" =#{year} and \n" +
-            "UAC.\"id\" = #{id}")
-    String findTotalOrderMoney(@Param("year") Integer year, @Param("id") String id);
+            "WHERE\n" +
+            "\tUAC.\"year\" = #{year}\n" +
+            "AND UAC.\"month\" BETWEEN 1\n" +
+            "AND #{month}\n" +
+            "AND UAC.\"id\" = #{id}")
+    String findTotalOrderMoney(@Param("year") Integer year, @Param("month") Integer month,@Param("id") String id);
 
     //查询月累计订单量
     @Select("SELECT\n" +
@@ -126,7 +127,7 @@ public interface SaleInfoDao {
             "\t\t\tELSE\n" +
             "\t\t\t\t出货数量\n" +
             "\t\t\tEND\n" +
-            "\t\t) ,\n" +
+            "\t\t) / 1000,\n" +
             "\t\t2\n" +
             "\t) 年累计出库量\n" +
             "FROM\n" +
@@ -140,8 +141,6 @@ public interface SaleInfoDao {
             "\t\tFROM\n" +
             "\t\t\t(\n" +
             "\t\t\t\tSELECT\n" +
-            "\t\t\t\t\tDM.dept_no,\n" +
-            "\t\t\t\t\tDM.dept_name,\n" +
             "\t\t\t\t\tCASE\n" +
             "\t\t\t\tWHEN TQ.OEB910 = 'M' THEN\n" +
             "\t\t\t\t\tTQ.TA_OGB07\n" +
@@ -157,7 +156,6 @@ public interface SaleInfoDao {
             "\t\t\t\t\"TO_CHAR\" (tq.oga02, 'mm') 月\n" +
             "\t\t\tFROM\n" +
             "\t\t\t\tERP_SD_O_TQRXAM tq\n" +
-            "\t\t\tLEFT JOIN erp_hr_m_dept_middle dm ON TQ.gem02 = DM.dept_names\n" +
             "\t\t\tWHERE\n" +
             "\t\t\t\ttq.OGA15 NOT IN (\n" +
             "\t\t\t\t\t'041',\n" +
@@ -168,7 +166,7 @@ public interface SaleInfoDao {
             "\t\t\t\t\t'022',\n" +
             "\t\t\t\t\t'SY062'\n" +
             "\t\t\t\t)\n" +
-            "\t\t\t)\n" +
+            "\t\t\t) --where 年=2018 and 月=10 \n" +
             "\t\tGROUP BY\n" +
             "\t\t\t人员编号,\n" +
             "\t\t\t年,\n" +
@@ -204,7 +202,7 @@ public interface SaleInfoDao {
             "\t\t\t\t'022',\n" +
             "\t\t\t\t'SY062'\n" +
             "\t\t\t)\n" +
-            "\t\t)\n" +
+            "\t\t) --WHERE TO_CHAR(OHA02,'yyyy') = 2018 and TO_CHAR(OHA02,'mm') = 10 \n" +
             "\tGROUP BY\n" +
             "\t\toha14,\n" +
             "\t\tTO_CHAR (OHA02, 'yyyy'),\n" +
@@ -213,9 +211,12 @@ public interface SaleInfoDao {
             "AND \"出库\".\"年\" = \"销退\".\"年\"\n" +
             "AND \"出库\".\"月\" = \"销退\".\"月\"\n" +
             "WHERE\n" +
-            "\t\"出库\".\"年\" = #{year}\n" +
-            "AND 出库.\"人员编号\" = #{id}\n")
-    String findTotalOutputSize(@Param("year") Integer year, @Param("id") String id);
+            "\t1 = 1\n" +
+            "AND 出库.年 = #{year}\n" +
+            "AND 出库.月 BETWEEN 1\n" +
+            "AND #{month}\n" +
+            "AND \"出库\".\"人员编号\" = #{id}")
+    String findTotalOutputSize(@Param("year") Integer year, @Param("month") Integer month,@Param("id") String id);
 
     //查询当月出库量
     @Select("SELECT\n" +
@@ -322,17 +323,14 @@ public interface SaleInfoDao {
 
     //查询年累计出库额
     @Select("SELECT\n" +
-            "\t\"ROUND\" (\n" +
-            "\t\tSUM (\n" +
-            "\t\t\tCASE\n" +
-            "\t\t\tWHEN 销退额 IS NOT NULL THEN\n" +
-            "\t\t\t\t含税金额 - 销退额\n" +
-            "\t\t\tELSE\n" +
-            "\t\t\t\t含税金额\n" +
-            "\t\t\tEND\n" +
-            "\t\t),\n" +
-            "\t\t2\n" +
-            "\t) 年累计出库额\n" +
+            "\t\"ROUND\"(SUM (\n" +
+            "\t\tCASE\n" +
+            "\t\tWHEN 销退额 IS NOT NULL THEN\n" +
+            "\t\t\t含税金额 - 销退额\n" +
+            "\t\tELSE\n" +
+            "\t\t\t含税金额\n" +
+            "\t\tEND\n" +
+            "\t) / 10000,2) 年累计出库额\n" +
             "FROM\n" +
             "\t(\n" +
             "\t\tSELECT\n" +
@@ -344,8 +342,6 @@ public interface SaleInfoDao {
             "\t\tFROM\n" +
             "\t\t\t(\n" +
             "\t\t\t\tSELECT\n" +
-            "\t\t\t\t\tDM.dept_no,\n" +
-            "\t\t\t\t\tDM.dept_name,\n" +
             "\t\t\t\t\tCASE\n" +
             "\t\t\t\tWHEN TQ.OEB910 = 'M' THEN\n" +
             "\t\t\t\t\tTQ.TA_OGB07\n" +
@@ -361,7 +357,6 @@ public interface SaleInfoDao {
             "\t\t\t\t\"TO_CHAR\" (tq.oga02, 'mm') 月\n" +
             "\t\t\tFROM\n" +
             "\t\t\t\tERP_SD_O_TQRXAM tq\n" +
-            "\t\t\tLEFT JOIN erp_hr_m_dept_middle dm ON TQ.gem02 = DM.dept_names\n" +
             "\t\t\tWHERE\n" +
             "\t\t\t\ttq.OGA15 NOT IN (\n" +
             "\t\t\t\t\t'041',\n" +
@@ -372,7 +367,7 @@ public interface SaleInfoDao {
             "\t\t\t\t\t'022',\n" +
             "\t\t\t\t\t'SY062'\n" +
             "\t\t\t\t)\n" +
-            "\t\t\t)\n" +
+            "\t\t\t) --where 年=2018 and 月=10 \n" +
             "\t\tGROUP BY\n" +
             "\t\t\t人员编号,\n" +
             "\t\t\t年,\n" +
@@ -408,7 +403,7 @@ public interface SaleInfoDao {
             "\t\t\t\t'022',\n" +
             "\t\t\t\t'SY062'\n" +
             "\t\t\t)\n" +
-            "\t\t)\n" +
+            "\t\t) --WHERE TO_CHAR(OHA02,'yyyy') = 2018 and TO_CHAR(OHA02,'mm') = 10 \n" +
             "\tGROUP BY\n" +
             "\t\toha14,\n" +
             "\t\tTO_CHAR (OHA02, 'yyyy'),\n" +
@@ -417,10 +412,13 @@ public interface SaleInfoDao {
             "AND \"出库\".\"年\" = \"销退\".\"年\"\n" +
             "AND \"出库\".\"月\" = \"销退\".\"月\"\n" +
             "WHERE\n" +
-            "\t\"出库\".\"年\" = #{year}\n" +
-            "AND 出库.\"人员编号\" = #{id}\n" +
+            "\t1 = 1\n" +
+            "AND 出库.年 = #{year}\n" +
+            "AND 出库.月 BETWEEN 1\n" +
+            "AND #{month}\n" +
+            "AND \"出库\".\"人员编号\" = #{id}\n" +
             "\n")
-    String findTotalOutputMoney(@Param("year") Integer year, @Param("id") String id);
+    String findTotalOutputMoney(@Param("year") Integer year,@Param("month") Integer month, @Param("id") String id);
 
     //查询当月出库额
     @Select("SELECT\n" +
@@ -527,30 +525,34 @@ public interface SaleInfoDao {
 
     //查询累计加价
     @Select("SELECT\n" +
-            "\t\"SUM\" (abc.\"累计加价\")*1000 累计加价 \n" +
+            "\t\"ROUND\" (\n" +
+            "\t\t\"SUM\" (abc.\"累计加价\"),\n" +
+            "\t\t2\n" +
+            "\t) 累计加价\n" +
             "FROM\n" +
             "\t(\n" +
             "\t\tSELECT\n" +
             "\t\t\tTO_CHAR (ord.oea02, 'yyyy') 年,\n" +
             "\t\t\tTO_CHAR (ord.oea02, 'mm') 月,\n" +
             "\t\t\t\"SUM\" (ORDS.ta_oeb065) 累计加价,\n" +
-            "\t\t\tORD.oea14 人员编号,\n" +
             "\t\t\tORD.oea15 部门编号,\n" +
             "\t\t\tdep.leaderid\n" +
             "\t\tFROM\n" +
             "\t\t\tERP_SD_O_ORDERS_DETAIL ords\n" +
-            "\t\tright JOIN ERP_SD_O_ORDERS ord ON ORDS.OEB01 = ORD.OEA01\n" +
-            "\t\tLEFT JOIN ERP_SD_O_DEPARTMENT dep ON ORD.oea15 = dep.GEM01 \n" +
+            "\t\tRIGHT JOIN ERP_SD_O_ORDERS ord ON ORDS.OEB01 = ORD.OEA01\n" +
+            "\t\tLEFT JOIN ERP_SD_O_DEPARTMENT dep ON ORD.oea15 = dep.GEM01\n" +
             "\t\tGROUP BY\n" +
             "\t\t\tTO_CHAR (ord.oea02, 'yyyy'),\n" +
             "\t\t\tTO_CHAR (ord.oea02, 'mm'),\n" +
             "\t\t\tORD.oea15,\n" +
-            "\t\t\tORD.oea14,\n" +
             "\t\t\tdep.leaderid\n" +
             "\t) abc\n" +
-            "where \n" +
-            "ABC.\"年\"=#{year}  and abc.人员编号 =#{id}\n")
-    String findTotalPrice(@Param("year") Integer year, @Param("id") String id);
+            "WHERE\n" +
+            "\tABC.\"年\" = #{year}\n" +
+            "AND ABC.\"月\" BETWEEN 1\n" +
+            "AND #{month}\n" +
+            "AND ABC.LEADERID = #{id}")
+    String findTotalPrice(@Param("year") Integer year, @Param("month") Integer month,@Param("id") String id);
 
     //年度目标量
     @Select("SELECT\n" +
@@ -771,50 +773,107 @@ public interface SaleInfoDao {
     String findMonthTargetMoney(@Param("year") Integer year, @Param("month") String month, @Param("id") String id);
 
     //累计回款
-    @Select("select sum(回款)from\n" +
-            "(\n" +
-            "\tSELECT\n" +
-            "\t\t客户厂商编号,\n" +
-            "\t\t\"SUM\" (本币金额) 回款\n" +
-            "\tFROM\n" +
-            "\t\t(\n" +
-            "\t\t\tSELECT\n" +
-            "\t\t\t\t客户厂商编号,\n" +
-            "\t\t\t\t本币金额\n" +
-            "\t\t\tFROM\n" +
-            "\t\t\t\t(\n" +
-            "\t\t\t\t\tSELECT\n" +
-            "\t\t\t\t\t\tPOST.nmg18 客户厂商编号,\n" +
-            "\t\t\t\t\t\t\"SUM\" (POSTD.npk09) 本币金额\n" +
-            "\t\t\t\t\tFROM\n" +
-            "\t\t\t\t\t\tERP_SD_O_DEPOSITPAYMENT post\n" +
-            "\t\t\t\t\tLEFT JOIN ERP_SD_O_DEPOSITPAYMENT_DETAIL postd ON POST.NMG00 = POSTD.NPK00\n" +
-            "\t\t\t\t\tWHERE\n" +
-            "\t\t\t\t\t\t\"TO_CHAR\" (POST.nmg01, 'yyyy') = #{year}\n" +
-            "\t\t\t\t\tGROUP BY\n" +
-            "\t\t\t\t\t\tPOST.nmg18\n" +
-            "\t\t\t\t)\n" +
-            "\t\t\tUNION ALL\n" +
-            "\t\t\t\t(\n" +
-            "\t\t\t\t\tSELECT\n" +
-            "\t\t\t\t\t\tNOTE.nmh11 客户编号,\n" +
-            "\t\t\t\t\t\t\"SUM\" (NOTE.nmh32) 本币金额\n" +
-            "\t\t\t\t\tFROM\n" +
-            "\t\t\t\t\t\tERP_SD_O_NOTERECEIVABLE note\n" +
-            "\t\t\t\t\tWHERE\n" +
-            "\t\t\t\t\t\t\"TO_CHAR\" (NOTE.nmh04, 'yyyy') = #{year}\n" +
-            "\t\t\t\t\tGROUP BY\n" +
-            "\t\t\t\t\t\tNOTE.nmh11\n" +
-            "\t\t\t\t)\n" +
-            "\t\t)\n" +
-            "\twhere 客户厂商编号 is not null\n" +
-            "\tGROUP BY\n" +
-            "\t\t客户厂商编号\n" +
-            ") a\n" +
-            "LEFT JOIN ERP_SD_O_CUSTOMER cu on CU.OCC01 = a.客户厂商编号\n" +
-            "where OCC04 = #{id}\n" +
-            "GROUP BY OCC04")
-    String findTotalReturnMoney(@Param("year") Integer year, @Param("id") String id);
+    //SELECT
+    //	SUM (回款)
+    //FROM
+    //	(
+    //		SELECT
+    //			客户厂商编号,
+    //			"SUM" (本币金额) 回款
+    //		FROM
+    //			(
+    //				SELECT
+    //					客户厂商编号,
+    //					本币金额
+    //				FROM
+    //					(
+    //						SELECT
+    //							POST.nmg18 客户厂商编号,
+    //							"SUM" (POSTD.npk09) 本币金额
+    //						FROM
+    //							ERP_SD_O_DEPOSITPAYMENT post
+    //						LEFT JOIN ERP_SD_O_DEPOSITPAYMENT_DETAIL postd ON POST.NMG00 = POSTD.NPK00
+    //						WHERE
+    //							"TO_CHAR" (POST.nmg01, 'yyyy') = 2018
+    //						AND "TO_CHAR" (POST.nmg01, 'mm') = 05
+    //						GROUP BY
+    //							POST.nmg18
+    //					)
+    //				UNION ALL
+    //					(
+    //						SELECT
+    //							NOTE.nmh11 客户编号,
+    //							"SUM" (NOTE.nmh32) 本币金额
+    //						FROM
+    //							ERP_SD_O_NOTERECEIVABLE note
+    //						WHERE
+    //							"TO_CHAR" (NOTE.nmh04, 'yyyy') = 2018
+    //						AND "TO_CHAR" (NOTE.nmh04, 'mm') = 05
+    //						GROUP BY
+    //							NOTE.nmh11
+    //					)
+    //			)
+    //		WHERE
+    //			客户厂商编号 IS NOT NULL
+    //		GROUP BY
+    //			客户厂商编号
+    //	) A
+    //LEFT JOIN ERP_SD_O_CUSTOMER cu ON CU.OCC01 = A .客户厂商编号
+    //WHERE
+    //	OCC04 = '1796'
+    //GROUP BY
+    //	OCC04
+    @Select("SELECT\n" +
+            "\tSUM (回款)\n" +
+            "FROM\n" +
+            "\t(\n" +
+            "\t\tSELECT\n" +
+            "\t\t\t客户厂商编号,\n" +
+            "\t\t\t\"SUM\" (本币金额) 回款\n" +
+            "\t\tFROM\n" +
+            "\t\t\t(\n" +
+            "\t\t\t\tSELECT\n" +
+            "\t\t\t\t\t客户厂商编号,\n" +
+            "\t\t\t\t\t本币金额\n" +
+            "\t\t\t\tFROM\n" +
+            "\t\t\t\t\t(\n" +
+            "\t\t\t\t\t\tSELECT\n" +
+            "\t\t\t\t\t\t\tPOST.nmg18 客户厂商编号,\n" +
+            "\t\t\t\t\t\t\t\"SUM\" (POSTD.npk09) 本币金额\n" +
+            "\t\t\t\t\t\tFROM\n" +
+            "\t\t\t\t\t\t\tERP_SD_O_DEPOSITPAYMENT post\n" +
+            "\t\t\t\t\t\tLEFT JOIN ERP_SD_O_DEPOSITPAYMENT_DETAIL postd ON POST.NMG00 = POSTD.NPK00\n" +
+            "\t\t\t\t\t\tWHERE\n" +
+            "\t\t\t\t\t\t\t\"TO_CHAR\" (POST.nmg01, 'yyyy') = #{year}\n" +
+            "\t\t\t\t\t\tAND \"TO_CHAR\" (POST.nmg01, 'mm') = #{month}\n" +
+            "\t\t\t\t\t\tGROUP BY\n" +
+            "\t\t\t\t\t\t\tPOST.nmg18\n" +
+            "\t\t\t\t\t)\n" +
+            "\t\t\t\tUNION ALL\n" +
+            "\t\t\t\t\t(\n" +
+            "\t\t\t\t\t\tSELECT\n" +
+            "\t\t\t\t\t\t\tNOTE.nmh11 客户编号,\n" +
+            "\t\t\t\t\t\t\t\"SUM\" (NOTE.nmh32) 本币金额\n" +
+            "\t\t\t\t\t\tFROM\n" +
+            "\t\t\t\t\t\t\tERP_SD_O_NOTERECEIVABLE note\n" +
+            "\t\t\t\t\t\tWHERE\n" +
+            "\t\t\t\t\t\t\t\"TO_CHAR\" (NOTE.nmh04, 'yyyy') = #{year}\n" +
+            "\t\t\t\t\t\tAND \"TO_CHAR\" (NOTE.nmh04, 'mm') = #{month}\n" +
+            "\t\t\t\t\t\tGROUP BY\n" +
+            "\t\t\t\t\t\t\tNOTE.nmh11\n" +
+            "\t\t\t\t\t)\n" +
+            "\t\t\t)\n" +
+            "\t\tWHERE\n" +
+            "\t\t\t客户厂商编号 IS NOT NULL\n" +
+            "\t\tGROUP BY\n" +
+            "\t\t\t客户厂商编号\n" +
+            "\t) A\n" +
+            "LEFT JOIN ERP_SD_O_CUSTOMER cu ON CU.OCC01 = A .客户厂商编号\n" +
+            "WHERE\n" +
+            "\tOCC04 = #{id}\n" +
+            "GROUP BY\n" +
+            "\tOCC04")
+    String findTotalReturnMoney(@Param("year") Integer year,@Param("month") Integer month, @Param("id") String id);
 
     //定时更新或插入
 

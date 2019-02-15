@@ -39,7 +39,9 @@ public class TaskScheduler {
     //@Scheduled(cron="0 0 0 * * ?")     //每天凌晨0点执行一次
     public void tableScheduled() {
         LocalDate yesterday = LocalDate.now().minusDays(1);
-        //获取员工信息集合
+        //获取历史信息接口
+        //saleInfoService.historySaleInfo();
+        //获取当前信息接口
         saleInfoService.findSaleInfo();
         final ArrayList<SaleInfo> saleInfos = saleInfoService.selectSaleInfo(new SaleInfoExample());
         //遍历员工对象

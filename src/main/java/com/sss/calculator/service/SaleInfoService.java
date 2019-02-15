@@ -27,5 +27,7 @@ public interface SaleInfoService {
 
     void timeUpdateOrInsert(List<SaleInfo> saleInfos);
 
+    void historySaleInfo();
+
 
 }
